@@ -5,7 +5,7 @@ const testStore = useTestStore();
 
 <template>
   <div>
-    <h1>{{testStore.message}}</h1>
+    <h1 class="text-3xl font-bold underline">{{testStore.message}}</h1>
     <button @click="testStore.setMessage('Hola a todos con pinia')" >Change Message</button>
   </div>
 </template>
