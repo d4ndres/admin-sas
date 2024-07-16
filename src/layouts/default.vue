@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import OverflowAside from '~/components/OverflowAside.vue';
 import { useExpanded } from '~/store/asideExpanded';
 const store = useExpanded();

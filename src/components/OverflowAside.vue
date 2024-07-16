@@ -16,8 +16,8 @@ const closeAside = () => {
 </script>
 
 <template>
-  <div v-if="props.modelValue" @mousedown="closeAside" class="z-50 fixed bg-alternative h-full w-full left-0 top-0">
-    <div @mousedown.stop class="bg-red-300 z-50 bg-overlay flex flex-col fixed inset-y-0 h-full lg:h-screen border-l border-overlay shadow-xl  w-screen max-w-2xl  right-0 data-open:animate-panel-slide-right-out transition-all duration-100 ease-in">
+  <div v-if="props.modelValue" @mousedown="closeAside" class="bg-black bg-opacity-50 z-50 fixed bg-alternative h-full w-full left-0 top-0">
+    <div @mousedown.stop class="bg-white z-50 bg-overlay flex flex-col fixed inset-y-0 h-full lg:h-screen border-l border-overlay shadow-xl  w-screen max-w-2xl  right-0 data-open:animate-panel-slide-right-out transition-all duration-100 ease-in">
       <div class="flex items-center h-14 border-b">
         <slot name="title"></slot>
       </div>
