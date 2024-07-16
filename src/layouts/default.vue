@@ -1,6 +1,6 @@
 <script setup>
 import OverflowAside from '~/components/OverflowAside.vue';
-import { useExpanded } from '~/store/asideExpanded.js';
+import { useExpanded } from '~/Store/AsideExpanded';
 const store = useExpanded();
 const { isExpanded } = storeToRefs(store);
 

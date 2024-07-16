@@ -1,5 +1,5 @@
 <script setup >
-import { useExpanded } from '~/store/asideExpanded';
+import { useExpanded } from '~/Store/AsideExpanded';
 const store = useExpanded();
 const { isExpanded } = storeToRefs(store);
 
