@@ -1,7 +1,7 @@
 <script  setup>
 
-const signIn = async ( ev : Event ) => {
-  const fields = Object.fromEntries(new FormData(ev.target as HTMLFormElement).entries());
+const signIn = async ( ev) => {
+  const fields = Object.fromEntries(new FormData(ev.target).entries());
   console.log(fields)
 }
 
