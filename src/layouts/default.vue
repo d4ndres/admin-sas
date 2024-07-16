@@ -1,10 +1,6 @@
 <script setup>
 import OverflowAside from '~/components/OverflowAside.vue';
-import { useExpanded } from '~/Store/AsideExpanded';
-const store = useExpanded();
-const { isExpanded } = storeToRefs(store);
-
-
+const isExpanded = true;
 
 // onMounted(() => {
 //   const handleResize = () => {

@@ -1,7 +1,5 @@
 <script setup >
-import { useExpanded } from '~/Store/AsideExpanded';
-const store = useExpanded();
-const { isExpanded } = storeToRefs(store);
+const isExpanded = true;
 
 const navList = [
   { path: '/home', text: 'Home', icon: 'home-outline' },
@@ -20,7 +18,7 @@ const logout = () => {
 <template>
   <aside class="border-r  flex flex-col transition-all duration-300">
     
-    <div @click="store.toggleExpanded" class="h-12 hover:bg-red-100 flex items-center justify-start cursor-pointer">
+    <div @click="() => console.log('toggle expanded')" class="h-12 hover:bg-red-100 flex items-center justify-start cursor-pointer">
       <li class="px-4 list-none flex gap-1 items-center">
         <Icon v-show="isExpanded" size="24" name="arrow-shape-left-to-line" />
         <Icon v-show="!isExpanded" size="24" name="arrow-shape-right-to-line" />
