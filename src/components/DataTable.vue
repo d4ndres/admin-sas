@@ -1,12 +1,12 @@
-<script setup lang="ts">
+<script setup>
 
 const props = defineProps({
   data: {
-    type: Array as () => Array<object>,
+    type: Array as () => Array,
     required: true
   },
   columns: {
-    type: Array as () => Array<string>,
+    type: Array as () => Array,
     default: () => []
   }
 });

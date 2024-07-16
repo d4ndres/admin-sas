@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup >
 import { useExpanded } from '~/store/asideExpanded';
 const store = useExpanded();
 const { isExpanded } = storeToRefs(store);

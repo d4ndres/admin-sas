@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script  setup>
 
 const signIn = async ( ev : Event ) => {
   const fields = Object.fromEntries(new FormData(ev.target as HTMLFormElement).entries());

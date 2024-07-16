@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 
 const route = useRoute()
 const breadcrumb = computed(() => route.fullPath.split('/').map((crumb, index) => {
