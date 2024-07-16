@@ -2,11 +2,11 @@
 
 const props = defineProps({
   data: {
-    type: Array as () => Array,
+    type: Array,
     required: true
   },
   columns: {
-    type: Array as () => Array,
+    type: Array,
     default: () => []
   }
 });
