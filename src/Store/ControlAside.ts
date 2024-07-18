@@ -1,15 +1,10 @@
 import {defineStore} from 'pinia'
+import {ref} from 'vue'
+export const useControlAsideStore = defineStore('controlAside', () => {
+  const isAsideOpen = ref<boolean>(true);
 
-export const useControlAsideStore = defineStore('controlAside', {
-  state: () => ({
-    isAsideOpen: true
-  }),
-  actions: {
-    toggleAside() {
-      this.isAsideOpen = !this.isAsideOpen
-    },
-    setAsideOpen(isOpen: boolean) {
-      this.isAsideOpen = isOpen
-    }
-  }
+  const toggleAside = () => isAsideOpen.value = !isAsideOpen.value;
+  const setAsideOpen = (isOpen: boolean) => isAsideOpen.value = isOpen;
+
+  return { isAsideOpen, toggleAside, setAsideOpen }
 })
