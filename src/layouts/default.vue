@@ -1,6 +1,7 @@
 <script setup>
 import { useControlAsideStore } from '~/Store/ControlAside';
-const controlAside = useControlAsideStore();
+const store = useControlAsideStore()
+const {isAsideOpen} = storeToRefs(store)
 
 // onMounted(() => {
 //   const handleResize = () => {
@@ -16,7 +17,7 @@ const controlAside = useControlAsideStore();
 
 <template>
   <div class="flex h-[100vh] ">
-    <NavList :class="{ 'min-w-[250px] ': controlAside.isAsideOpen, 'min-w-[50px]': !controlAside.isAsideOpen }" />
+    <NavList :class="{ 'min-w-[250px] ': isAsideOpen, 'min-w-[50px]': !isAsideOpen }" />
 
     <!-- <HeaderDashboard /> -->
     <main class="w-full overflow-auto">
