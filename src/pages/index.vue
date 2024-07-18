@@ -1,4 +1,6 @@
 <script  setup>
+import { useTestStore } from '~/Store/TestStore';
+const testStore = useTestStore();
 
 const signIn = async ( ev) => {
   const fields = Object.fromEntries(new FormData(ev.target).entries());
@@ -14,6 +16,9 @@ const signIn = async ( ev) => {
         <span>
           Actualización digital
         </span>
+        <h1>{{testStore.message}}</h1>
+        <button @click="testStore.setMessage('Hola a todos con pinia')" >Change Message</button>
+  
       </div>
       <form @submit.prevent="signIn" class="flex flex-col gap-4">
         <div class="wrapper-input flex flex-col gap-1">
