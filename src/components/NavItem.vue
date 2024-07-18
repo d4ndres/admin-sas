@@ -1,11 +1,15 @@
 <script setup >
-const isExpanded = true;
+
 
 
 defineProps({
   dataItem: {
     type: Object,
     required: true
+  },
+  isExpanded: {
+    type: Boolean,
+    default: true
   }
 })
 

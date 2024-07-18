@@ -1,6 +1,7 @@
 <script setup>
 import OverflowAside from '~/components/OverflowAside.vue';
-const isExpanded = true;
+import { useControlAsideStore } from '~/Store/ControlAside';
+const controlAside = useControlAsideStore();
 
 // onMounted(() => {
 //   const handleResize = () => {
@@ -16,7 +17,7 @@ const isExpanded = true;
 
 <template>
   <div class="flex h-[100vh] ">
-    <NavList :class="{ 'min-w-[250px] ': isExpanded, 'min-w-[50px]': !isExpanded }" />
+    <NavList :class="{ 'min-w-[250px] ': controlAside.isAsideOpen, 'min-w-[50px]': !controlAside.isAsideOpen }" />
 
     <!-- <HeaderDashboard /> -->
     <main class="w-full overflow-auto">
