@@ -2,7 +2,7 @@ import {defineStore} from 'pinia'
 
 export const useControlAsideStore = defineStore('controlAside', {
   state: () => ({
-    isAsideOpen: false
+    isAsideOpen: true
   }),
   actions: {
     toggleAside() {

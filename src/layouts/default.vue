@@ -1,5 +1,4 @@
 <script setup>
-import OverflowAside from '~/components/OverflowAside.vue';
 import { useControlAsideStore } from '~/Store/ControlAside';
 const controlAside = useControlAsideStore();
 

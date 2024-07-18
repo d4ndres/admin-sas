@@ -33,7 +33,7 @@ const rows = computed(() => {
 
 <template>
 
-  <table class="min-w-full bg-white border border-gray-300">
+  <table class="min-w-full border border-gray-300">
     <thead>
       <tr>
         <!-- Generate table header dynamically -->
@@ -42,7 +42,7 @@ const rows = computed(() => {
     </thead>
     <tbody>
       <!-- Generate table rows dynamically -->
-      <tr v-for="(row, index) in rows" :key="index" class="hover:bg-gray-100">
+      <tr v-for="(row, index) in rows" :key="index" class="hover:bg-gray-100 bg-opacity-20">
         <td v-for="(value, key) in row" :key="key" class="px-6 py-4 whitespace-nowrap">{{ value }}</td>
       </tr>
     </tbody>
