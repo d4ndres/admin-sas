@@ -11,8 +11,8 @@ const breadcrumb = computed(() => route.fullPath.split('/').map((crumb, index) =
 </script>
 <template>
   <ul class="breadcrumb flex gap-0 text-sm px-2">
-    <li v-for="(crumb, index) in breadcrumb" :key="'breadcrumb' + crumb" :class="{ 'text-gray-600': index != 1 }"
-      class="hover:text-red-100">
+    <li v-for="(crumb, index) in breadcrumb" :key="'breadcrumb' + crumb" :class="{ 'text-gray': index != 1 }"
+      class="hover:green_light">
       <NuxtLink :to="crumb.path">{{ crumb.text }}</NuxtLink>
     </li>
   </ul>

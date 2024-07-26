@@ -18,11 +18,21 @@ const logout = () => {
   console.log('logout');
 }
 
+
+const darkMode = ref(false)
+const toggleDarkMode = () => {
+  darkMode.value = !darkMode.value
+  document.documentElement.classList.toggle('dark')
+  localStorage.setItem('darkMode', darkMode.value ? 'true' : 'false')
+}
+onMounted(() => {
+  darkMode.value = localStorage.getItem('darkMode') === 'true'
+})
 </script>
 <template>
-  <aside class="border-r  flex flex-col transition-all duration-300">
+  <aside class="border-r border-gray dark:border-gray_dark flex flex-col transition-all duration-300">
     
-    <div @click="toggleAside" class="h-12 hover:bg-red-100 flex items-center justify-start cursor-pointer">
+    <div @click="toggleAside" class="h-12 hover:bg-green_light dark:hover:bg-green flex items-center justify-start cursor-pointer">
       <li class="px-4 list-none flex gap-1 items-center">
         <Icon v-show="isAsideOpen" size="24" name="arrow-shape-left-to-line" />
         <Icon v-show="!isAsideOpen" size="24" name="arrow-shape-right-to-line" />
@@ -34,15 +44,22 @@ const logout = () => {
     </div>
     <div class="">
 
+      <div @click="toggleDarkMode" class="h-12 flex items-center hover:bg-green_light dark:hover:bg-green cursor-pointer">
+        <li class="px-4 list-none flex gap-1 items-center">
+          <Icon v-show="!darkMode" size="18" name="moon" />
+          <Icon v-show="darkMode" size="18" name="sun" />
+          <span v-show="isAsideOpen">{{ darkMode ? 'Light' : 'Dark' }}</span>
+        </li>
+      </div>
 
-      <div class="h-12 flex items-center hover:bg-red-100 cursor-pointer">
+      <div class="h-12 flex items-center hover:bg-green_light dark:hover:bg-green cursor-pointer">
         <li class="px-4 list-none flex gap-1 items-center">
           <Icon size="18" name="user" />
           <span v-show="isAsideOpen">{{ username }}</span>
         </li>
       </div>
 
-      <div @click="logout" class="h-12 flex items-center hover:bg-red-100 cursor-pointer">
+      <div @click="logout" class="h-12 flex items-center hover:bg-green_light dark:hover:bg-green cursor-pointer">
         <li class="px-4 list-none flex gap-1 items-center">
           <Icon size="18" name="logout" />
           <span v-show="isAsideOpen">Cerrar sesión</span>
