@@ -195,8 +195,22 @@ const actividades = [
   }
 ]
 
+const mockPersonas = [
+  { label: 'Carlos Armado Llanos', value: 3 },
+  { label: 'Hector ortiz', value: 6 },
+  { label: 'Jose', value: 4 },
+  { label: 'Carlos Guzman', value: 2 },
+  { label: 'Ernesto Gutiérrez', value: 1 }
+]
 
 let showModal = ref(false);
+let formData = ref({})
+
+const submitAddActividad = (ev) => {
+  const fields = Object.fromEntries(new FormData(ev.target).entries())
+  formData.value = fields
+}
+
 
 </script>
 
@@ -206,12 +220,53 @@ let showModal = ref(false);
     <h2 class="text-2xl">Actividades</h2>
 
     <div>
-      <ButtonAdd @click="showModal = !showModal"/>
+      <ButtonAdd @click="showModal = !showModal" />
     </div>
   </HeaderDashboard>
   <NuxtLayout name="content">
     <DataTable :data="actividades" />
   </NuxtLayout>
 
-  <OverflowAside v-model="showModal" />
+  <OverflowAside v-model="showModal">
+    <template #header>
+      <h2 class="text-2xl">Ingreso de actividades</h2>
+    </template>
+    <!-- 
+    select -> empleado_id
+    date -> fecha
+    select -> labor
+    number -> lote
+    checkbox -> horasExtrasAntes () => despliega dos inputs mas
+    - time -> horaInicioAntes
+    - time -> horaFinAntes
+    checkbox -> horasExtrasDespues () => despliega dos inputs mas
+    - time -> horaInicioDespues
+    - time -> horaFinDespues
+
+    submit button
+    -->
+
+    <form @submit.prevent="submitAddActividad">
+      <FormInputWrapper label="Trabajador" for="empleado_id">
+        <FormInput id="empleado_id" name="empleado_id" type="select" :options="mockPersonas" />
+      </FormInputWrapper>
+      <FormInputWrapper label="Fecha" for="fecha">
+        <FormInput id="fecha" name="fecha" type="date" />
+      </FormInputWrapper>
+      <FormInputWrapper label="Labor" for="labor">
+        <FormInput id="labor" name="labor" type="select" :options="mockPersonas" />
+      </FormInputWrapper>
+      <FormInputWrapper label="Lote" for="lote">
+        <FormInput id="lote" name="lote" type="select" :options="mockPersonas" />
+      </FormInputWrapper>
+
+
+      <input type="submit" />
+    </form>
+
+    <pre>
+  {{ formData }}
+</pre>
+
+  </OverflowAside>
 </template>
