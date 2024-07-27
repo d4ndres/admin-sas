@@ -26,7 +26,7 @@ const closeAside = () => {
       </div>
       <div class="flex items-center flex-row-reverse h-14 px-4">
         <slot name="footer">
-          <slot name="button-confirmation"></slot>
+          <slot name="otherButtons"></slot>
           <ButtonCancel @click="updateData"/>
         </slot>
       </div>

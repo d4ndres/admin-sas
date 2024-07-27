@@ -209,7 +209,14 @@ let formData = ref({})
 const submitAddActividad = (ev) => {
   const fields = Object.fromEntries(new FormData(ev.target).entries())
   formData.value = fields
+  console.log(formData.value)
 }
+
+const dateNow = () => (new Date()).toISOString().split('T')[0];
+
+
+let horasExtrasAntes = ref(false)
+let horasExtrasDespues = ref(false)
 
 
 </script>
@@ -246,27 +253,51 @@ const submitAddActividad = (ev) => {
     submit button
     -->
 
-    <form @submit.prevent="submitAddActividad">
-      <FormInputWrapper label="Trabajador" for="empleado_id">
-        <FormInput id="empleado_id" name="empleado_id" type="select" :options="mockPersonas" />
-      </FormInputWrapper>
-      <FormInputWrapper label="Fecha" for="fecha">
-        <FormInput id="fecha" name="fecha" type="date" />
-      </FormInputWrapper>
-      <FormInputWrapper label="Labor" for="labor">
-        <FormInput id="labor" name="labor" type="select" :options="mockPersonas" />
-      </FormInputWrapper>
-      <FormInputWrapper label="Lote" for="lote">
-        <FormInput id="lote" name="lote" type="select" :options="mockPersonas" />
-      </FormInputWrapper>
+    <form @submit.prevent="submitAddActividad" >
+      <div class="grid grid-cols-2 gap-x-4">
+        <FormInputWrapper label="Trabajador" for="empleado_id">
+          <FormInput id="empleado_id" name="empleado_id" type="select" :options="mockPersonas" />
+        </FormInputWrapper>
+        <FormInputWrapper label="Fecha" for="fecha">
+          <FormInput id="fecha" name="fecha" type="date" :value="dateNow()" />
+        </FormInputWrapper>
+        <FormInputWrapper label="Labor" for="labor">
+          <FormInput id="labor" name="labor" type="select" :options="mockPersonas" />
+        </FormInputWrapper>
+        <FormInputWrapper label="Lote" for="lote">
+          <FormInput id="lote" name="lote" type="select" :options="mockPersonas" />
+        </FormInputWrapper>
+      </div>
 
+      <div>
+        <FormInputWrapper label="Horas extras antes" for="horasExtrasAntes" class="!flex-row !mb-1">
+          <FormInput @change="($event) => horasExtrasAntes = $event.target.checked" :checked="horasExtrasAntes" type="checkbox" id="horasExtrasAntes" name="horasExtrasAntes" />
+        </FormInputWrapper>
+        <div class="grid grid-cols-2 gap-4" v-if="horasExtrasAntes">
+          <FormInputWrapper label="Hora inicio" for="horaInicioAntes">
+            <FormInput type="time" id="horaInicioAntes" name="horaInicioAntes" />
+          </FormInputWrapper>
+          <FormInputWrapper label="Hora final" for="horaFinalAntes">
+            <FormInput type="time" id="horaFinalAntes" name="horaFinalAntes" />
+          </FormInputWrapper>
+        </div>
+      </div>
 
-      <input type="submit" />
+      <div>
+        <FormInputWrapper label="Horas extras después" for="horasExtrasDespues" class="!flex-row !mb-1">
+          <FormInput @change="($event) => horasExtrasDespues = $event.target.checked" :checked="horasExtrasDespues" type="checkbox" id="horasExtrasDespues" name="horasExtrasDespues" />
+        </FormInputWrapper>
+        <div class="grid grid-cols-2 gap-4" v-if="horasExtrasDespues">
+          <FormInputWrapper label="Hora inicio" for="horaInicioDespues">
+            <FormInput type="time" id="horaInicioDespues" name="horaInicioDespues" />
+          </FormInputWrapper>
+          <FormInputWrapper label="Hora final" for="horaFinalDespues">
+            <FormInput type="time" id="horaFinalDespues" name="horaFinalDespues" />
+          </FormInputWrapper>
+        </div>
+      </div>
+      
+      <ButtonCancel type="submit">Enviar</ButtonCancel>
     </form>
-
-    <pre>
-  {{ formData }}
-</pre>
-
   </OverflowAside>
 </template>

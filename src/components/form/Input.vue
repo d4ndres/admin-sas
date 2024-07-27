@@ -55,13 +55,14 @@ const emitInput = (ev) => {
 </script>
 
 <template>
-  <input v-if="type != 'select'" :type="type" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)"
-    class="text-darkoutline-none bg-transparent border rounded-md border-gray dark:border-gray_dark dark:focus:border-gray_dark_font px-2 py-1" />
-  <select v-else :value="modelValue" @input="emitInput"
+  <select v-if="type == 'select'" :value="modelValue" @input="emitInput"
     class="dark:bg-dark outline-none bg-transparent border rounded-md border-gray dark:border-gray_dark dark:focus:border-gray_dark_font px-2 py-1">
     <option  v-if="optionsIsPrimitive" v-for="(option, index) in options" :key="option + index" :value="option">
       {{ option }}</option>
     <option v-else v-for="(option, index) in options" :key="option[setElementOptionValue] + index"
       :value="option[setElementOptionValue]">{{ option[setElementOptionLabel] }}</option>
   </select>
+  <input v-else-if="type == 'checkbox'" :type="type" />
+  <input v-else :type="type" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" class="text-darkoutline-none bg-transparent border rounded-md border-gray dark:border-gray_dark dark:focus:border-gray_dark_font px-2 py-1" />
+  
 </template>

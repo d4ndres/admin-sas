@@ -10,11 +10,17 @@
   --scroll-bg: #f1f1f1;
   --scroll-thumb: #b3b2b2;
   --scroll-thumb-hover: #888;
+  --filter-schema-date: 0;
 }
 :root.dark {
   --scroll-bg: rgba(25, 25, 25, 1);
   --scroll-thumb: #0e0e0e;
   --scroll-thumb-hover: #888;
+  --filter-schema-date: 0.7;
+}
+
+*::-webkit-calendar-picker-indicator {
+  filter: invert(var(--filter-schema-date));
 }
 
 *::-webkit-scrollbar {
