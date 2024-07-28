@@ -16,7 +16,7 @@ const {isAsideOpen} = storeToRefs(store)
 </script>
 
 <template>
-  <div class="flex h-[100vh] dark:bg-dark dark:text-gray_dark_font transition-[background] duration-300">
+  <div class="flex h-[100vh] bg-vainilla dark:bg-dark dark:text-gray_dark_font transition-[background] duration-300">
     <NavList :class="{ 'min-w-[250px] ': isAsideOpen, 'min-w-[50px]': !isAsideOpen }" />
 
     <!-- <HeaderDashboard /> -->

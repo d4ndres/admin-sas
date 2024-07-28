@@ -17,7 +17,7 @@ const closeAside = () => {
 
 <template>
   <div v-if="props.modelValue" @mousedown="closeAside" class="bg-dark_opacity z-50 fixed bg-alternative h-full w-full left-0 top-0">
-    <div @mousedown.stop class="bg-white dark:bg-dark z-50 bg-overlay flex flex-col fixed inset-y-0 h-full lg:h-screen border-l dark:border-gray_dark border-overlay shadow-xl  w-screen max-w-2xl  right-0 data-open:animate-panel-slide-right-out transition-all duration-100 ease-in">
+    <div @mousedown.stop class="move bg-vainilla dark:bg-dark z-50 bg-overlay flex flex-col fixed inset-y-0 h-full lg:h-screen border-l dark:border-gray_dark border-overlay shadow-xl  w-screen max-w-2xl  right-0 ">
       <div class="px-4 flex items-center h-14 border-b dark:border-gray_dark">
         <slot name="header"></slot>
       </div>
@@ -33,3 +33,19 @@ const closeAside = () => {
     </div>
   </div>
 </template>
+
+<style scoped>
+.move {
+  animation: move linear 0.2s;
+}
+
+@keyframes move {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+</style>
