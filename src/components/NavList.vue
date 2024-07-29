@@ -14,9 +14,17 @@ const navList = [
 ]
 
 const username = computed(() => 'admin');
-const logout = () => {
-  console.log('logout');
+
+
+const { auth } = useSupabaseClient()
+const logout = async () => {
+  const something = await auth.signOut()
+  if(something.error) {
+    console.log('logout', something);
+  }
+  return navigateTo('/')
 }
+
 
 
 const darkMode = ref(false)
@@ -40,31 +48,27 @@ onMounted(() => {
     </div>
 
     <div class="flex-1">
-      <NavItem :isExpanded="isAsideOpen" v-for="item in navList" :key="item.path" :dataItem="item" />
+      <RouterLink v-for="item in navList" :key="item.path" :to="item.path">
+        <NavItem :isExpanded="isAsideOpen" :dataItem="item" />
+      </RouterLink>
     </div>
     <div class="">
 
-      <div @click="toggleDarkMode" class="h-12 flex items-center hover:bg-green_light dark:hover:bg-green cursor-pointer">
-        <li class="px-4 list-none flex gap-1 items-center">
+      <NavItem @click="toggleDarkMode" >
           <Icon v-show="!darkMode" size="18" name="moon" />
           <Icon v-show="darkMode" size="18" name="sun" />
           <span v-show="isAsideOpen">{{ darkMode ? 'Light' : 'Dark' }}</span>
-        </li>
-      </div>
+      </NavItem>
 
-      <div class="h-12 flex items-center hover:bg-green_light dark:hover:bg-green cursor-pointer">
-        <li class="px-4 list-none flex gap-1 items-center">
+      <NavItem>
           <Icon size="18" name="user" />
           <span v-show="isAsideOpen">{{ username }}</span>
-        </li>
-      </div>
+      </NavItem>
 
-      <div @click="logout" class="h-12 flex items-center hover:bg-green_light dark:hover:bg-green cursor-pointer">
-        <li class="px-4 list-none flex gap-1 items-center">
+      <NavItem @click="logout" >
           <Icon size="18" name="logout" />
           <span v-show="isAsideOpen">Cerrar sesión</span>
-        </li>
-      </div>
+      </NavItem>
     </div>
   </aside>
 </template>

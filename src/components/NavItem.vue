@@ -4,8 +4,7 @@
 
 defineProps({
   dataItem: {
-    type: Object,
-    required: true
+    type: Object
   },
   isExpanded: {
     type: Boolean,
@@ -17,10 +16,12 @@ defineProps({
 </script>
 
 <template>
-  <NuxtLink :to="dataItem.path" class="h-12 flex items-center hover:bg-green_light dark:hover:bg-green cursor-pointer">
+  <div class="h-12 flex items-center hover:bg-green_light dark:hover:bg-green cursor-pointer">
     <li class="px-4 list-none flex gap-1 items-center">
-      <Icon size="18" :name="dataItem.icon" />
-      <span v-show="isExpanded">{{ dataItem.text }}</span>
+      <slot>
+        <Icon size="18" :name="dataItem.icon" />
+        <span v-show="isExpanded">{{ dataItem.text }}</span>
+      </slot>
     </li>
-  </NuxtLink>
+  </div>
 </template>

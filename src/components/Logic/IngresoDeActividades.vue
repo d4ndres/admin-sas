@@ -1,4 +1,27 @@
 <script setup>
+import { useMainStore } from '~/Store/MainStore';
+const store = useMainStore()
+const {setEmpleados, getEmpleadosToSelect, setActividades, getActividadesToSelect, setLotes, getLotesToSelect} = store
+
+
+onMounted( () => {
+  $fetch('/api/empleados')
+  .then( ({trabajadores}) => {
+    setEmpleados(trabajadores)
+  })
+
+  $fetch('/api/actividades')
+  .then( (actividades) => {
+    setActividades(actividades)
+  })
+
+  $fetch('/api/lotes')
+  .then( (lotes) => {
+    setLotes(lotes)
+  })
+
+
+})
 
 const mockPersonas = [
   { label: 'Carlos Armado Llanos', value: 3 },
@@ -27,16 +50,16 @@ let horasExtrasDespues = ref(false)
   <form @submit.prevent="submitAddActividad" id="IngresoDeActividades">
     <div class="grid gap-x-4">
       <FormInputWrapper label="Trabajador" for="empleado_id">
-        <FormInput id="empleado_id" name="empleado_id" type="select" :options="mockPersonas" />
+        <FormInput id="empleado_id" name="empleado_id" type="select" :options="getEmpleadosToSelect()" />
       </FormInputWrapper>
       <FormInputWrapper label="Fecha" for="fecha">
         <FormInput id="fecha" name="fecha" type="date" :value="dateNow()" />
       </FormInputWrapper>
       <FormInputWrapper label="Labor" for="labor">
-        <FormInput id="labor" name="labor" type="select" :options="mockPersonas" />
+        <FormInput id="labor" name="labor" type="select" :options="getActividadesToSelect()" />
       </FormInputWrapper>
       <FormInputWrapper label="Lote" for="lote">
-        <FormInput id="lote" name="lote" type="select" :options="mockPersonas" />
+        <FormInput id="lote" name="lote" type="select" :options="getLotesToSelect()" />
       </FormInputWrapper>
     </div>
 

@@ -1,10 +1,29 @@
 <script  setup>
-// import { useTestStore } from '~/Store/TestStore';
-// const testStore = useTestStore();
+definePageMeta({
+  middleware: 'unauthenticated'
+})
 
-const signIn = async ( ev) => {
-  const fields = Object.fromEntries(new FormData(ev.target).entries());
-  console.log(fields)
+const { auth } = useSupabaseClient()
+
+const showLoader = ref(false)
+
+const signIn = ( ev ) => {
+  const credentials = Object.fromEntries(new FormData(ev.target).entries());
+  showLoader.value = true    
+  auth.signInWithPassword(credentials)
+  .then( response => {
+    if( response.error ) {
+      throw response.error
+    } else {
+      navigateTo('/home')
+    }
+  })
+  .catch( error => {
+    console.error(error.message)
+  })
+  .finally( () => {
+    showLoader.value = false
+  })
 }
 
 </script>
@@ -16,26 +35,15 @@ const signIn = async ( ev) => {
         <span>
           Actualización digital
         </span>
-        <!-- <h1>{{testStore.message}}</h1>
-        <button @click="testStore.setMessage('Hola a todos con pinia')" >Change Message</button>
-          -->
       </div>
       <form @submit.prevent="signIn" class="flex flex-col gap-4">
-        <!-- <div class="wrapper-input flex flex-col gap-1">
-          <label for="email">Correo electrónico</label>
-          <input id="email" name="email" type="email" class="border border-gray p-2 rounded-md" />
-        </div>
-        <div class="wrapper-input flex flex-col gap-1">
-          <label for="password">Contraseña</label>
-          <input id="password" name="password" type="password" class="border border-gray p-2 rounded-md" />
-        </div> -->
         <FormInputWrapper label="Correo" for="email">
           <FormInput  id="email" name="email" type="email" required/>
         </FormInputWrapper>
         <FormInputWrapper label="Contraseña" for="password">
           <FormInput  id="password" name="password" type="password" required/>
         </FormInputWrapper>
-        <button class="bg-lime-500 p-2 rounded-md">Iniciar sección</button>
+        <button class="bg-lime-500 p-2 rounded-md border border-1 dark:border-gray_dark">Iniciar sección</button>
       </form>
     </div>
   </div>
