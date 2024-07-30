@@ -1,7 +1,17 @@
 <script setup>
 import { useMainStore } from '~/Store/MainStore';
 const store = useMainStore()
-const {setEmpleados, getEmpleadosToSelect, setActividades, getActividadesToSelect, setLotes, getLotesToSelect, setSemillas, getSemillasToSelect} = store
+const {
+  setEmpleados, 
+  getEmpleadosToSelect, 
+  setActividades, 
+  getActividadesToSelect, 
+  setLotes, 
+  getLotesToSelect, 
+  setSemillas, 
+  getSemillasToSelect,
+  pushElementToHistorialDeActividades
+} = store
 
 
 onMounted( () => {
@@ -80,12 +90,16 @@ const submitAddActividad = (ev) => {
     }
 
     if( horasExtras.length ) {
-      console.log(x, horasExtras)
       return $fetch('/api/empleadosHorasExtra', {
         method: 'post',
         body: horasExtras
       })
     }
+
+    console.log(data)
+
+    pushElementToHistorialDeActividades(data)
+
     return new Promise( (resolve) => {
       resolve({
         error: null,

@@ -1,5 +1,5 @@
 import {defineStore} from 'pinia'
-import {ref} from 'vue'
+import {ref, computed} from 'vue'
 export const useMainStore = defineStore('mainStore', () => {
   const empleados = ref([])
   const setEmpleados = (data: any) => {
@@ -27,6 +27,23 @@ export const useMainStore = defineStore('mainStore', () => {
   }
   const getSemillasToSelect = () => semillas.value.map( (semilla: any) => ({value: semilla.id, label: semilla.nombre}) )
 
+  const historialDeActividades = ref([])
+  const setHistorialDeActividades = (data: any) => {
+    historialDeActividades.value = data
+  }
+  const pushElementToHistorialDeActividades = (data: any) => {
+    historialDeActividades.value.push(data as never)
+  }
+  const showHistorialDeActividadesToTable = computed(() => {
+    return historialDeActividades.value.map( (actividad: any) => ({
+      id: actividad.id,
+      fecha: actividad.fecha,
+      empleado: actividad.Empleado.nombre,
+      actividad: actividad.Actividad.nombre,
+      lote: actividad.Lote.nombre,
+      semilla: actividad.Semilla?.nombre,
+    }))
+  })
 
   return { 
     empleados, 
@@ -40,6 +57,10 @@ export const useMainStore = defineStore('mainStore', () => {
     getLotesToSelect,
     semillas,
     setSemillas,
-    getSemillasToSelect
+    getSemillasToSelect,
+    historialDeActividades,
+    setHistorialDeActividades,
+    pushElementToHistorialDeActividades,
+    showHistorialDeActividadesToTable
   }
 })
