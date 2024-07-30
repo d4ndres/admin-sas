@@ -20,6 +20,14 @@ export const useMainStore = defineStore('mainStore', () => {
   }
   const getLotesToSelect = () => lotes.value.map( (lote: any) => ({value: lote.id, label: lote.nombre}) )
 
+
+  const semillas = ref([])
+  const setSemillas = (data: any) => {
+    semillas.value = data
+  }
+  const getSemillasToSelect = () => semillas.value.map( (semilla: any) => ({value: semilla.id, label: semilla.nombre}) )
+
+
   return { 
     empleados, 
     setEmpleados, 
@@ -29,6 +37,9 @@ export const useMainStore = defineStore('mainStore', () => {
     getActividadesToSelect,
     lotes,
     setLotes,
-    getLotesToSelect
+    getLotesToSelect,
+    semillas,
+    setSemillas,
+    getSemillasToSelect
   }
 })
