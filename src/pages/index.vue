@@ -15,6 +15,7 @@ const signIn = ( ev ) => {
     if( response.error ) {
       throw response.error
     } else {
+      localStorage.setItem('user', JSON.stringify(response.data.user))
       navigateTo('/home')
     }
   })

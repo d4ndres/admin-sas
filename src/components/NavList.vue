@@ -22,6 +22,7 @@ const logout = async () => {
   if(something.error) {
     console.log('logout', something);
   }
+  localStorage.removeItem('user')
   return navigateTo('/')
 }
 

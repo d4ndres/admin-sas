@@ -60,6 +60,30 @@ export const useMainStore = defineStore('mainStore', () => {
     }))
   })
 
+  const vehiculos = ref([])
+  const setVehiculos = (data: any) => {
+    vehiculos.value = data
+  }
+  const getVehiculosToSelect = computed(() => {
+    return vehiculos.value.map( (vehiculo: any) => ({value: vehiculo.id, label: vehiculo.nombre}) )
+  })
+
+  const combustibles : any = ref([])
+  const setCombustibles = (data: any) => {
+    combustibles.value = data
+  }
+  const showCombustiblesToTable = computed(() => {
+    return combustibles.value
+  })
+
+  const getCombustiblesToSelect = computed(() => {
+    return combustibles.value.map( (combustible: any) => ({value: combustible.id, label: combustible.nombre}) )
+  })
+
+  const updateElementInCombustibles = ( data: any) => {
+    const index = combustibles.value.findIndex( (combustible: any) => combustible.id == data.id )
+    combustibles.value[index] = data
+  }
 
   return { 
     empleados, 
@@ -80,6 +104,14 @@ export const useMainStore = defineStore('mainStore', () => {
     showHistorialDeActividadesToTable,
     horasExtra,
     setHorasExtra,
-    showHorasExtraToTable
+    showHorasExtraToTable,
+    vehiculos,
+    setVehiculos,
+    getVehiculosToSelect,
+    combustibles,
+    setCombustibles,
+    showCombustiblesToTable,
+    getCombustiblesToSelect,
+    updateElementInCombustibles
   }
 })
