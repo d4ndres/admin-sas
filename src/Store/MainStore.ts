@@ -45,6 +45,22 @@ export const useMainStore = defineStore('mainStore', () => {
     }))
   })
 
+  const horasExtra = ref([])
+  const setHorasExtra = (data: any) => {
+    horasExtra.value = data
+  }
+  const showHorasExtraToTable = computed(() => {
+    return horasExtra.value.map( (horaExtra: any) => ({
+      id: horaExtra.id,
+      empleado: horaExtra.Empleado.nombre,
+      actividad: horaExtra.EmpleadoActividadRealizada.Actividad.nombre,
+      fecha: horaExtra.EmpleadoActividadRealizada.fecha,
+      horaInicio: horaExtra.horaInicio,
+      horaSalida: horaExtra.horaSalida,
+    }))
+  })
+
+
   return { 
     empleados, 
     setEmpleados, 
@@ -61,6 +77,9 @@ export const useMainStore = defineStore('mainStore', () => {
     historialDeActividades,
     setHistorialDeActividades,
     pushElementToHistorialDeActividades,
-    showHistorialDeActividadesToTable
+    showHistorialDeActividadesToTable,
+    horasExtra,
+    setHorasExtra,
+    showHorasExtraToTable
   }
 })
