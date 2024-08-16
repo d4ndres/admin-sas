@@ -18,7 +18,7 @@ onMounted(() => {
 
 <template>
   <HeaderDashboard>
-    <h2 class="text-2xl">Horas extra</h2>
+    Horas extra
   </HeaderDashboard>
   <NuxtLayout  name="content">
     <DataTable :data="showHorasExtraToTable" />

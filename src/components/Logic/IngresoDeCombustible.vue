@@ -1,9 +1,9 @@
 <script setup>
-import { useSession } from '~/Store/Session';
+// import { useSession } from '~/Store/Session';
 import { useMainStore } from '~/Store/MainStore';
 
-const storeSession = useSession()
-const { user } = storeToRefs(storeSession)
+// const storeSession = useSession()
+// const { user } = storeToRefs(storeSession)
 
 const store = useMainStore()
 const {updateElementInCombustibles} = store
@@ -18,7 +18,7 @@ let sending = ref(false)
 const submitIngresoCombustible = (ev) => {
   const fields = Object.fromEntries(new FormData(ev.target).entries())
   fields.valorTotal = fields.valorTotal.replace(/\./g, '')
-  fields.user_id = user.value.id
+  // fields.user_id = user.value.id
 
   sending.value = true
   $fetch('/api/ingresoDeCombustible', {

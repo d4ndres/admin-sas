@@ -17,16 +17,15 @@ let showModalGastoCombustible = ref(false);
 
 <template>
   <HeaderDashboard>
-    <h2 class="text-2xl">Combustibles</h2>
-
-    <div class="flex gap-4">
-      <ButtonMinus @click="showModalGastoCombustible = !showModalGastoCombustible">
-        Gasto de combustible
-      </ButtonMinus>
-      <ButtonAdd @click="showModalIngresosCombustible = !showModalIngresosCombustible">
-        Ingreso de combustible
-      </ButtonAdd>
-    </div>
+    Combustibles
+    <template #buttons>
+      <ButtonAction type="down" @click="showModalGastoCombustible = !showModalGastoCombustible">
+        Gastos
+      </ButtonAction>
+      <ButtonAction type="up" @click="showModalIngresosCombustible = !showModalIngresosCombustible">
+        Ingresos
+      </ButtonAction>
+    </template>
   </HeaderDashboard>
 
   <NuxtLayout  name="content">

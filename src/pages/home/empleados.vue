@@ -50,7 +50,7 @@ const empleados = [
 
 <template>
   <HeaderDashboard>
-    <h2 class="text-2xl">Empleados</h2>
+    Empleados
   </HeaderDashboard>
   <NuxtLayout  name="content">
     <DataTable :data="empleados" />

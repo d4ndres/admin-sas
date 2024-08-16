@@ -2,14 +2,16 @@
 import { useControlAsideStore } from '~/Store/ControlAside';
 const store = useControlAsideStore()
 const {isAsideOpen} = storeToRefs(store)
+const {setMinimalist} = store
 
-// onMounted(() => {
-//   const handleResize = () => {
-//     isExpanded.value = window.innerWidth >= 768;
-//   };
-//   handleResize();
-//   window.addEventListener('resize', handleResize); // Actualizar el valor de isExpanded cuando se cambie el tamaño de la ventana
-// });
+onMounted(() => {
+  const handleResize = () => {
+    store.setAsideOpen(window.innerWidth > 768);
+    setMinimalist(window.innerWidth < 768)
+  };
+  handleResize();
+  window.addEventListener('resize', handleResize); // Actualizar el valor de isExpanded cuando se cambie el tamaño de la ventana
+});
 
 
 // dark mode - #1F1F1F

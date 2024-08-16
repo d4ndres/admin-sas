@@ -18,11 +18,11 @@ let showModal = ref(false);
 
 <template>
   <HeaderDashboard>
-    <h2 class="text-2xl">Actividades</h2>
+    Actividades
 
-    <div>
-      <ButtonAdd @click="showModal = !showModal" />
-    </div>
+    <template #buttons>
+      <ButtonAction @click="showModal = !showModal" />
+    </template >
   </HeaderDashboard>
   <NuxtLayout name="content">
     <DataTable :data="showHistorialDeActividadesToTable" />

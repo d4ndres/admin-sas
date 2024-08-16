@@ -1,6 +1,6 @@
 <script setup >
-import { useSession } from '~/Store/Session';
-const storeSession = useSession()
+// import { useSession } from '~/Store/Session';
+// const storeSession = useSession()
 
 
 definePageMeta({
@@ -8,8 +8,8 @@ definePageMeta({
 })
 
 onMounted(() => {
-  const user = JSON.parse(localStorage.getItem('user'))
-  storeSession.setUser(user)
+  // const user = JSON.parse(localStorage.getItem('user'))
+  // storeSession.setUser(user)
 })
 
 </script>
