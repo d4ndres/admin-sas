@@ -18,7 +18,6 @@ const getUserId = () => {
   const session = useSupabaseSession()
   return session.value?.user.id
 }
-console.log()
 
 const submitIngresoCombustible = (ev) => {
   const fields = Object.fromEntries(new FormData(ev.target).entries())

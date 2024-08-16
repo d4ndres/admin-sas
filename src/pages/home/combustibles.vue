@@ -50,11 +50,11 @@ let showModalGastoCombustible = ref(false);
       <h2 class="text-2xl">Gasto de combustible</h2>
     </template>
 
-    <!-- <LogicIngresoDeActividades />
+    <LogicGastoDeCombustible />
 
     <template #otherButtons>
-      <ButtonCancel type="submit" form="IngresoDeActividades">Enviar</ButtonCancel>
-    </template> -->
+      <ButtonCancel type="submit" form="GastosDeCombustible">Enviar</ButtonCancel>
+    </template>
   </OverflowAside>
 
 </template>

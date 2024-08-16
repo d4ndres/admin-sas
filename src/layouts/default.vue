@@ -22,7 +22,7 @@ onMounted(() => {
     <NavList :class="{ 'min-w-[250px] ': isAsideOpen, 'min-w-[50px]': !isAsideOpen }" />
 
     <!-- <HeaderDashboard /> -->
-    <main class="w-full overflow-auto">
+    <main class="w-full h-full overflow-auto">
       <slot></slot>
     </main>
   </div>
