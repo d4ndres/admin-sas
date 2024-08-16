@@ -2,8 +2,7 @@
 import { useMainStore } from '~/Store/MainStore';
 const store = useMainStore()
 const {
-  setEmpleados, 
-  getEmpleadosToSelect, 
+  setEmpleados,  
   setActividades, 
   getActividadesToSelect, 
   setLotes, 
@@ -12,12 +11,13 @@ const {
   getSemillasToSelect,
   pushElementToHistorialDeActividades
 } = store
+const {getEmpleadosToSelect} = storeToRefs(store)
 
 
 onMounted( () => {
   $fetch('/api/empleados')
-  .then( ({trabajadores}) => {
-    setEmpleados(trabajadores)
+  .then( ({data}) => {
+    setEmpleados(data)
   })
 
   $fetch('/api/actividades')
@@ -135,7 +135,7 @@ const submitAddActividad = (ev) => {
   <form @submit.prevent="submitAddActividad" id="IngresoDeActividades">
     <div class="grid gap-x-4">
       <FormInputWrapper label="Trabajador" for="empleado_id">
-        <FormInput required :disabled="sending" id="empleado_id" name="empleado_id" type="select" :options="getEmpleadosToSelect()" />
+        <FormInput required :disabled="sending" id="empleado_id" name="empleado_id" type="select" :options="getEmpleadosToSelect" />
       </FormInputWrapper>
       <FormInputWrapper label="Fecha" for="fecha">
         <FormInput required :disabled="sending" id="fecha" name="fecha" type="date" :value="dateNow()" />

@@ -1,11 +1,34 @@
 import {defineStore} from 'pinia'
 import {ref, computed} from 'vue'
 export const useMainStore = defineStore('mainStore', () => {
-  const empleados = ref([])
+  const empleados : any = ref([])
   const setEmpleados = (data: any) => {
     empleados.value = data
   }
-  const getEmpleadosToSelect = () => empleados.value.map( (empleado: any) => ({value: empleado.id, label: empleado.nombre}) )
+  // const getEmpleadosToSelect = () => empleados.value.map( (empleado: any) => ({value: empleado.id, label: empleado.nombre}) )
+  const getEmpleadosToSelect = computed(() => {
+    return empleados.value.map( (empleado : any) => {
+      return {
+        value: empleado.id,
+        label: empleado.nombre
+    }})
+  })
+
+
+  const getEmpleadosToTable = computed(() => {
+    return empleados.value.map( (empleado : any) => {
+      return {
+        id: empleado.id,
+        nombre: empleado.nombre,
+        especialidad: empleado.especialidad,
+        estado: empleado.isActive ? 'Activo' : 'Inactivo',
+      }
+    })
+  })
+
+  const pushElementToEmpleado = ( empleado : any) => {
+    empleados.value.push(empleado)
+  }
 
   const actividades = ref([])
   const setActividades = (data: any) => {
@@ -113,7 +136,9 @@ export const useMainStore = defineStore('mainStore', () => {
   return { 
     empleados, 
     setEmpleados, 
-    getEmpleadosToSelect, 
+    getEmpleadosToSelect,
+    getEmpleadosToTable, 
+    pushElementToEmpleado,
     actividades, 
     setActividades, 
     getActividadesToSelect,

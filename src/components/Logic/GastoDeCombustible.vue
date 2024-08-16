@@ -9,13 +9,13 @@ const {
   getLotesToSelect,
   setVehiculos,
   setEmpleados, 
-  getEmpleadosToSelect, 
   updateElementInCombustibles
 } = store
 
 const {
   getCombustiblesToSelect,
-  getVehiculosToSelect
+  getVehiculosToSelect,
+  getEmpleadosToSelect
 } = storeToRefs(store)
 
 const dateNow = () => (new Date()).toISOString().split('T')[0];
@@ -31,8 +31,8 @@ onMounted(() => {
     setVehiculos(data)
   })
   $fetch('/api/empleados')
-  .then( ({trabajadores}) => {
-    setEmpleados(trabajadores)
+  .then( ({data}) => {
+    setEmpleados(data)
   })
   $fetch('/api/actividades')
   .then( (actividades) => {
@@ -76,7 +76,7 @@ const sending = ref(false)
       <FormInput required :disabled="sending" id="vehiculo_id" name="vehiculo_id" type="select" :options="getVehiculosToSelect"/>
     </FormInputWrapper>
     <FormInputWrapper label="Empleado" for="empleado_id">
-      <FormInput required :disabled="sending" id="empleado_id" name="empleado_id" type="select" :options="getEmpleadosToSelect()"/>
+      <FormInput required :disabled="sending" id="empleado_id" name="empleado_id" type="select" :options="getEmpleadosToSelect"/>
     </FormInputWrapper>
     <FormInputWrapper label="Actividad" for="actividad_id">
       <FormInput required :disabled="sending" id="actividad_id" name="actividad_id" type="select" :options="getActividadesToSelect()"/>
