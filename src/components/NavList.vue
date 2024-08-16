@@ -41,14 +41,12 @@ onMounted(() => {
 <template>
   <aside class="border-r border-gray dark:border-gray_dark flex flex-col transition-all duration-300">
     
-    <div @click="toggleAside" class="h-12 hover:bg-green_light dark:hover:bg-green flex items-center justify-start cursor-pointer">
-      <li class="px-4 list-none flex gap-1 items-center">
-        <Icon v-show="isAsideOpen" size="24" name="arrow-shape-left-to-line" />
-        <Icon v-show="!isAsideOpen" size="24" name="arrow-shape-right-to-line" />
-      </li>
-    </div>
+    <NavItem @click="toggleAside">
+      <Icon v-show="isAsideOpen" size="24" name="arrow-shape-left-to-line" />
+      <Icon v-show="!isAsideOpen" size="24" name="arrow-shape-right-to-line" />
+    </NavItem>
 
-    <div class="flex-1">
+    <div class="flex-1 overflow-y-auto overflow-x-hidden">
       <RouterLink v-for="item in navList" :key="item.path" :to="item.path">
         <NavItem :isExpanded="isAsideOpen" :dataItem="item" />
       </RouterLink>

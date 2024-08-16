@@ -14,11 +14,16 @@ const {getCombustiblesToSelect} = storeToRefs(store)
 const dateNow = () => (new Date()).toISOString().split('T')[0];
 let sending = ref(false)
 
+const getUserId = () => {
+  const session = useSupabaseSession()
+  return session.value?.user.id
+}
+console.log()
 
 const submitIngresoCombustible = (ev) => {
   const fields = Object.fromEntries(new FormData(ev.target).entries())
   fields.valorTotal = fields.valorTotal.replace(/\./g, '')
-  // fields.user_id = user.value.id
+  fields.user_id = getUserId()
 
   sending.value = true
   $fetch('/api/ingresoDeCombustible', {
