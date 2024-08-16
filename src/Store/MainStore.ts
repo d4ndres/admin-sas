@@ -85,6 +85,31 @@ export const useMainStore = defineStore('mainStore', () => {
     combustibles.value[index] = data
   }
 
+  const combustiblesHistorial : any = ref([])
+  const pushElementToCombustiblesHistorial = (data: any) => {
+    data.forEach( (element: any) => {
+      const index = combustiblesHistorial.value.findIndex( (combustibleHistorial: any) => combustibleHistorial.id == element.id )
+      if (index == -1) {
+        combustiblesHistorial.value.push(element)
+      }
+    })
+  }
+  const showCombustiblesHistorialToTable = (combustible_id : any) => {
+    const elementLog = combustiblesHistorial.value.filter( ({combustible_id} : any) => combustible_id == combustible_id )
+    return elementLog.map( (element : any) => ({
+      id: element.id,
+      fecha: element.fecha,
+      cantidad: element.cantidad,
+      valorTotal: element.valorTotal,
+      user_id: element.user_id,
+      nombre: element.CombustibleInventario?.nombre,
+      lote: element.CombustibleGasto?.Lote.nombre,
+      empleado: element.CombustibleGasto?.Empleado.nombre,
+      vehiculo: element.CombustibleGasto?.Vehiculo.nombre,
+      actividad: element.CombustibleGasto?.Actividad.nombre,
+    }))
+  }
+
   return { 
     empleados, 
     setEmpleados, 
@@ -112,6 +137,9 @@ export const useMainStore = defineStore('mainStore', () => {
     setCombustibles,
     showCombustiblesToTable,
     getCombustiblesToSelect,
-    updateElementInCombustibles
+    updateElementInCombustibles,
+    combustiblesHistorial,
+    pushElementToCombustiblesHistorial,
+    showCombustiblesHistorialToTable
   }
 })
