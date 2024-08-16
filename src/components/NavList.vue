@@ -59,10 +59,10 @@ onMounted(() => {
           <span v-show="isAsideOpen">{{ darkMode ? 'Light' : 'Dark' }}</span>
       </NavItem>
 
-      <NavItem>
+      <!-- <NavItem>
           <Icon size="18" name="user" />
           <span v-show="isAsideOpen">{{ username }}</span>
-      </NavItem>
+      </NavItem> -->
 
       <NavItem @click="logout" >
           <Icon size="18" name="logout" />
