@@ -4,15 +4,27 @@ const store = useMainStore()
 const {setCombustibles} = store
 const {showCombustiblesToTable} = storeToRefs(store)
 
+const router = useRouter()
+const callbacksRow = ref([])
+
 onMounted(() => {
   $fetch('/api/combustiblesInventario')
   .then(({data}) => {
     setCombustibles(data)
+    callbacksRow.value = data.map((item) => {
+      return () => {
+        router.push(`/home/combustible-inventario-${item.id}`)
+      }
+    })
   })
 })
 
 let showModalIngresosCombustible = ref(false);
 let showModalGastoCombustible = ref(false);
+
+
+
+
 </script>
 
 <template>
@@ -29,7 +41,7 @@ let showModalGastoCombustible = ref(false);
   </HeaderDashboard>
 
   <NuxtLayout  name="content">
-    <DataTable :data="showCombustiblesToTable" />
+    <DataTable :data="showCombustiblesToTable" :callbacksRow="callbacksRow" />
   </NuxtLayout>
 
   <OverflowAside v-model="showModalIngresosCombustible">
