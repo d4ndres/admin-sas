@@ -7,7 +7,7 @@ export const useMainStore = defineStore('mainStore', () => {
   }
   // const getEmpleadosToSelect = () => empleados.value.map( (empleado: any) => ({value: empleado.id, label: empleado.nombre}) )
   const getEmpleadosToSelect = computed(() => {
-    return empleados.value.map( (empleado : any) => {
+    return empleados.value.filter( (empleado : any) => empleado.isActive ).map( (empleado : any) => {
       return {
         value: empleado.id,
         label: empleado.nombre
@@ -16,13 +16,32 @@ export const useMainStore = defineStore('mainStore', () => {
 
   const toggleStateEmpleadosFromTable = (data: any) => {
     const index = empleados.value.findIndex((empleado: any) => empleado.id == data.id)
-    const updatedEmpleado = {
+    empleados.value.splice(index, 1, {
       id: data.id,
       nombre: data.nombre,
       especialidad: data.especialidad,
       isActive: !data.estado
-    }
-    empleados.value.splice(index, 1, updatedEmpleado)
+    })
+
+    $fetch(`/api/empleados/state/${data.id}`, {
+      method: 'PUT',
+      body: JSON.stringify({isActive: !data.estado})
+    })
+    .then(( response : any )=> {
+      if( response.error ) 
+      throw new Error( response.error.message )
+
+      console.log(response)
+    })
+    .catch( () => {
+      console.log('error')
+      empleados.value.splice(index, 1, {
+        id: data.id,
+        nombre: data.nombre,
+        especialidad: data.especialidad,
+        isActive: data.estado
+      })
+    })
   }
 
 
@@ -34,7 +53,7 @@ export const useMainStore = defineStore('mainStore', () => {
         especialidad: empleado.especialidad,
         estado: empleado.isActive,
       }
-    })
+    }).sort( (a : any,b : any) => a.id - b.id )
   })
 
   const pushElementToEmpleado = ( empleado : any) => {

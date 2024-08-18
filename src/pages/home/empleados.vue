@@ -4,8 +4,6 @@ const store = useMainStore()
 const {setEmpleados, toggleStateEmpleadosFromTable} = store
 const {getEmpleadosToTable} = storeToRefs(store)
 
-
-
 onMounted(() => {
   $fetch(`/api/empleados`)
   .then(({data}) => {
@@ -14,15 +12,10 @@ onMounted(() => {
 })
 
 const showModal = ref(false)
-const toggle = ref(false)
-
-
 
 const toggleEstado = (row) => {
   toggleStateEmpleadosFromTable(row)
 }
-
-
 </script>
 
 <template>
