@@ -14,6 +14,17 @@ export const useMainStore = defineStore('mainStore', () => {
     }})
   })
 
+  const toggleStateEmpleadosFromTable = (data: any) => {
+    const index = empleados.value.findIndex((empleado: any) => empleado.id == data.id)
+    const updatedEmpleado = {
+      id: data.id,
+      nombre: data.nombre,
+      especialidad: data.especialidad,
+      isActive: !data.estado
+    }
+    empleados.value.splice(index, 1, updatedEmpleado)
+  }
+
 
   const getEmpleadosToTable = computed(() => {
     return empleados.value.map( (empleado : any) => {
@@ -21,7 +32,7 @@ export const useMainStore = defineStore('mainStore', () => {
         id: empleado.id,
         nombre: empleado.nombre,
         especialidad: empleado.especialidad,
-        estado: empleado.isActive ? 'Activo' : 'Inactivo',
+        estado: empleado.isActive,
       }
     })
   })
@@ -137,7 +148,8 @@ export const useMainStore = defineStore('mainStore', () => {
     empleados, 
     setEmpleados, 
     getEmpleadosToSelect,
-    getEmpleadosToTable, 
+    getEmpleadosToTable,
+    toggleStateEmpleadosFromTable,
     pushElementToEmpleado,
     actividades, 
     setActividades, 

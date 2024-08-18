@@ -1,7 +1,7 @@
 <script setup>
 import { useMainStore } from '~/Store/MainStore';
 const store = useMainStore()
-const {setEmpleados} = store
+const {setEmpleados, toggleStateEmpleadosFromTable} = store
 const {getEmpleadosToTable} = storeToRefs(store)
 
 
@@ -13,9 +13,16 @@ onMounted(() => {
   })
 })
 
-const showModal = ref(false);
-
+const showModal = ref(false)
 const toggle = ref(false)
+
+
+
+const toggleEstado = (row) => {
+  toggleStateEmpleadosFromTable(row)
+}
+
+
 </script>
 
 <template>
@@ -29,8 +36,8 @@ const toggle = ref(false)
   </HeaderDashboard>
   <NuxtLayout  name="content">
     <DataTable :data="getEmpleadosToTable">
-      <template #default="{ value, key }">
-        <ButtonEstate v-if="key == 'estado'" v-model="toggle"/>
+      <template #default="{ row, key, value }">
+        <ButtonState v-if="key == 'estado'" :value="value" @input="toggleEstado(row)"/>
       </template>
     </DataTable>
   </NuxtLayout>
