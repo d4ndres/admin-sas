@@ -15,6 +15,7 @@ const props = defineProps({
   }
 });
 
+
 const headers = computed(() => {
   if( props.columns.length ) {
     return props.columns
@@ -53,7 +54,11 @@ const callbackRow = (index) => {
       <!-- Generate table rows dynamically -->
       <tr @click="callbackRow(index)" v-for="(row, index) in rows" :key="index" class="hover:bg-green_light dark:hover:bg-green">
         <!-- <td v-for="(value, key) in row" :key="key" class="px-3 sm:px-6 border py-4 whitespace-nowrap text-center max-w-4 overflow-hidden sm:overflow-auto hover:max-w-max">{{ value }}</td> -->
-        <td v-for="(value, key) in row" :key="key" class="px-6 py-4 whitespace-nowrap">{{ value }}</td>
+        <td v-for="(value, key) in row" :key="key" class="px-6 py-4 whitespace-nowrap">
+          <slot name="default" :value="value" :key="key" >
+            {{value}}
+          </slot>
+        </td>
       </tr>
     </tbody>
   </table>

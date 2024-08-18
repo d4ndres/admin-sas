@@ -12,6 +12,7 @@ export default {
   theme: {
     extend: {},
     colors: {
+      black: '#000000',
       transparent: 'transparent',
       vainilla: '#FFF5E0',
       dark: 'rgba(31, 31, 31, 1)',

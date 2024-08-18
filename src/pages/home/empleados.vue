@@ -15,12 +15,12 @@ onMounted(() => {
 
 const showModal = ref(false);
 
+const toggle = ref(false)
 </script>
 
 <template>
   <HeaderDashboard>
     Empleados
-
     <template #buttons>
       <ButtonAction @click="showModal = true" >
         Nuevo registro
@@ -28,7 +28,11 @@ const showModal = ref(false);
     </template>
   </HeaderDashboard>
   <NuxtLayout  name="content">
-    <DataTable :data="getEmpleadosToTable" />
+    <DataTable :data="getEmpleadosToTable">
+      <template #default="{ value, key }">
+        <ButtonEstate v-if="key == 'estado'" v-model="toggle"/>
+      </template>
+    </DataTable>
   </NuxtLayout>
 
   <OverflowAside v-model="showModal">
