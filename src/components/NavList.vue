@@ -39,19 +39,19 @@ onMounted(() => {
 })
 </script>
 <template>
-  <aside class="border-r border-gray dark:border-gray_dark flex flex-col transition-all duration-300">
+  <aside>
     
-    <NavItem @click="toggleAside">
+    <NavItem @click="toggleAside" class="md:visible invisible hidden md:flex">
       <Icon v-show="isAsideOpen" size="24" name="arrow-shape-left-to-line" />
       <Icon v-show="!isAsideOpen" size="24" name="arrow-shape-right-to-line" />
     </NavItem>
 
-    <div class="flex-1 overflow-y-auto overflow-x-hidden">
+    <div class="flex-1 overflow-y-auto overflow-x-hidden flex flex-row md:flex-col">
       <RouterLink v-for="item in navList" :key="item.path" :to="item.path">
         <NavItem :isExpanded="isAsideOpen" :dataItem="item" />
       </RouterLink>
     </div>
-    <div class="">
+    <div class="flex flex-row md:flex-col">
 
       <NavItem @click="toggleDarkMode" >
           <Icon v-show="!darkMode" size="18" name="moon" />
