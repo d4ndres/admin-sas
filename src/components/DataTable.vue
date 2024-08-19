@@ -57,28 +57,32 @@ const isFiltersActive = ref(false)
 
 
 <template>
-  <div class="w-full h-full overflow-auto">
-    <div class="flex" v-if="!hideControls">
-      <div class="px-2 py-1 border border-gray dark:border-gray_dark transition-all duration-300 cursor-pointer hover:bg-gray_dark">
+  <Transition>
+    <div class="w-full h-full overflow-auto" v-if="headers.length">
+      <!--border border-gray dark:border-gray_dark -->
+    <div class="flex sticky top-0 bg-vainilla dark:bg-dark z-50" v-if="!hideControls">
+      <div class="px-2 py-1 transition-all duration-300 cursor-pointer hover:bg-dark_opacity dark:hover:bg-gray_dark shadow-[0_0_1px_1px_inset] shadow-gray dark:shadow-gray_dark">
         Columnas
       </div>
+      
       <div @click="isFiltersActive = !isFiltersActive" 
       :class="{ 'bg-gray_dark' : isFiltersActive}"
-      class="px-2 py-1 border border-gray dark:border-gray_dark transition-all duration-300 cursor-pointer hover:bg-gray_dark">
+      class="px-2 py-1 transition-all duration-300 cursor-pointer hover:bg-dark_opacity dark:hover:bg-gray_dark shadow-[0_0_1px_1px_inset] shadow-gray dark:shadow-gray_dark">
         Filtros
       </div>
     </div>
-    <table class="min-w-full border border-gray dark:border-gray_dark transition-all duration-300">
+
+    <table class="min-w-full transition-all duration-300 shadow-[0_0_1px_1px_inset] shadow-gray dark:shadow-gray_dark">
       <thead>
-        <tr>
+        <tr class="sticky top-8 bg-vainilla dark:bg-dark shadow-[0_0_1px_1px_inset] shadow-gray dark:shadow-gray_dark">
           <!-- Generate table header dynamically -->
           <th v-for="(header, index) in headers" :key="index"
-            class="relative px-6 py-3 border-b border-gray dark:border-gray_dark transition-[border] duration-300 text-left text-xs font-semibold uppercase tracking-wider">
+            class="relative px-6 py-3 duration-300 text-left text-xs font-semibold uppercase tracking-wider">
             {{ header.name }}
             
             <div
               v-show="isFiltersActive"
-              class="absolute h-[calc(100%_-_0.5rem)] w-8 right-1 top-1 flex justify-center items-center cursor-pointer">
+              class="absolute h-[calc(100%_-_0.5rem)] w-8 right-1 top-1 flex justify-center items-center cursor-pointer hover:bg-dark_opacity dark:hover:bg-gray_dark">
               <Icon name="filter" />
             </div>
           </th>
@@ -99,6 +103,21 @@ const isFiltersActive = ref(false)
     </table>
 
   </div>
-
-
+  </Transition>
 </template>
+
+
+<style scoped>
+
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+
+</style>
