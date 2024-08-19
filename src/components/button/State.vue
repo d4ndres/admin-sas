@@ -10,6 +10,7 @@ const input = () => {
 </script>
 
 <template>
+  <!-- La transición es mejor que cambie a animación y el cambio de bgsound se hace agnóstico al resto de código -->
   <div @click="input" 
   :class="{ '!bg-transparent': !(props.value || modelValue) }"
   class="shadow-[0_0_1px_1px] shadow-gray dark:shadow-gray_dark bg-green_light dark:bg-green w-10 h-5 rounded-full relative delay-300 transition-100 transition-all" >

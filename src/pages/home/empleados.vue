@@ -28,7 +28,7 @@ const toggleEstado = (row) => {
     </template>
   </HeaderDashboard>
   <NuxtLayout  name="content">
-    <DataTable :data="getEmpleadosToTable">
+    <DataTable :data="getEmpleadosToTable" :columns="['id', 'Empleados', 'Especialidad', 'Estado']">
       <template #default="{ row, key, value }">
         <ButtonState v-if="key == 'estado'" :value="value" @input="toggleEstado(row)"/>
       </template>
