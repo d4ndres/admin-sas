@@ -60,56 +60,87 @@ const isFiltersActive = ref(false)
   <Transition>
     <div class="w-full h-full overflow-auto" v-if="headers.length">
       <!--border border-gray dark:border-gray_dark -->
-    <div class="flex sticky top-0 bg-vainilla dark:bg-dark z-50" v-if="!hideControls">
-      <div class="px-2 py-1 transition-all duration-300 cursor-pointer hover:bg-dark_opacity dark:hover:bg-gray_dark shadow-[0_0_1px_1px_inset] shadow-gray dark:shadow-gray_dark">
-        Columnas
+      <div class="flex top-0 bg-vainilla dark:bg-dark" v-if="!hideControls">
+        
+        <div class="relative ">
+          <Popover>
+            <template #default="{showPopover}">
+              <div 
+              :class="{'bg-gray dark:bg-gray_dark' : showPopover}"
+              class="px-2 py-1 transition-all duration-300 cursor-pointer hover:bg-gray dark:hover:bg-gray_dark shadow-[0_0_1px_1px_inset] shadow-gray dark:shadow-gray_dark">
+                Columnas
+              </div>
+            </template>
+            <template #popover>
+              <NavItem class="bg-gray dark:bg-gray_dark shadow-sm shadow-gray_dark tracking-normal capitalize text-nowrap">Ordenar de A a la Z</NavItem>
+              <NavItem class="bg-gray dark:bg-gray_dark shadow-sm shadow-gray_dark tracking-normal capitalize text-nowrap">Ordenar de A a la Z</NavItem>
+              <NavItem class="bg-gray dark:bg-gray_dark shadow-sm shadow-gray_dark tracking-normal capitalize text-nowrap">Ordenar de A a la Z</NavItem>
+              <NavItem class="bg-gray dark:bg-gray_dark shadow-sm shadow-gray_dark tracking-normal capitalize text-nowrap">Ordenar de A a la Z</NavItem>
+              <NavItem class="bg-gray dark:bg-gray_dark shadow-sm shadow-gray_dark tracking-normal capitalize text-nowrap">Ordenar de A a la Z</NavItem>
+              <NavItem class="bg-gray dark:bg-gray_dark shadow-sm shadow-gray_dark tracking-normal capitalize text-nowrap">Ordenar de A a la Z</NavItem>
+
+            </template>
+          </Popover>
+        </div>
+
+        <div @click="isFiltersActive = !isFiltersActive" :class="{ 'bg-gray dark:bg-gray_dark': isFiltersActive }"
+          class="px-2 py-1 transition-all duration-300 cursor-pointer hover:bg-gray dark:hover:bg-gray_dark shadow-[0_0_1px_1px_inset] shadow-gray dark:shadow-gray_dark">
+          Filtros
+        </div>
       </div>
-      
-      <div @click="isFiltersActive = !isFiltersActive" 
-      :class="{ 'bg-gray_dark' : isFiltersActive}"
-      class="px-2 py-1 transition-all duration-300 cursor-pointer hover:bg-dark_opacity dark:hover:bg-gray_dark shadow-[0_0_1px_1px_inset] shadow-gray dark:shadow-gray_dark">
-        Filtros
-      </div>
+
+      <table
+        class="min-w-full transition-all duration-300 shadow-[0_0_1px_1px_inset] shadow-gray dark:shadow-gray_dark">
+        <thead>
+          <tr
+            class="top-8 bg-vainilla dark:bg-dark shadow-[0_0_1px_1px_inset] shadow-gray dark:shadow-gray_dark">
+            <!-- Generate table header dynamically -->
+            <th v-for="(header, index) in headers" :key="index"
+              class="relative px-6 py-3 duration-300 text-left text-xs font-semibold uppercase tracking-wider">
+              <span class="">
+                {{ header.name }}
+              </span>
+
+              <div class="absolute top-0 bottom-0 right-1 flex items-center">
+                <Popover >
+                  <template #default="{showPopover}">
+                    <div v-show="isFiltersActive"
+                      :class="{'bg-gray dark:bg-gray_dark' : showPopover}"
+                      class="p-1 flex justify-center items-center cursor-pointer hover:bg-gray hover:dark:bg-gray_dark ">
+                      <Icon name="filter" />
+                    </div>
+                  </template>
+                  <template #popover >
+                    <NavItem class="bg-gray dark:bg-gray_dark shadow-sm shadow-gray_dark tracking-normal capitalize text-nowrap">Ordenar de A a la Z</NavItem>
+                    <NavItem class="bg-gray dark:bg-gray_dark shadow-sm shadow-gray_dark tracking-normal capitalize text-nowrap">Ordenar de Z a la A</NavItem>
+                    <NavItem class="bg-gray dark:bg-gray_dark shadow-sm shadow-gray_dark tracking-normal capitalize text-nowrap">Filtra por valores</NavItem>
+                  </template>
+                </Popover>
+              </div>
+
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Generate table rows dynamically -->
+          <tr @click="callbackRow(index)" v-for="(row, index) in rows" :key="index"
+            class="hover:bg-gray dark:hover:bg-gray_dark">
+            <!-- <td v-for="(value, key) in row" :key="key" class="px-3 sm:px-6 border py-4 whitespace-nowrap text-center max-w-4 overflow-hidden sm:overflow-auto hover:max-w-max">{{ value }}</td> -->
+            <td v-for="(value, key) in row" :key="key" class="px-6 py-4 whitespace-nowrap">
+              <slot name="default" :value="value" :key="key" :row="row">
+                {{ value }}
+              </slot>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
     </div>
-
-    <table class="min-w-full transition-all duration-300 shadow-[0_0_1px_1px_inset] shadow-gray dark:shadow-gray_dark">
-      <thead>
-        <tr class="sticky top-8 bg-vainilla dark:bg-dark shadow-[0_0_1px_1px_inset] shadow-gray dark:shadow-gray_dark">
-          <!-- Generate table header dynamically -->
-          <th v-for="(header, index) in headers" :key="index"
-            class="relative px-6 py-3 duration-300 text-left text-xs font-semibold uppercase tracking-wider">
-            {{ header.name }}
-            
-            <div
-              v-show="isFiltersActive"
-              class="absolute h-[calc(100%_-_0.5rem)] w-8 right-1 top-1 flex justify-center items-center cursor-pointer hover:bg-dark_opacity dark:hover:bg-gray_dark">
-              <Icon name="filter" />
-            </div>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Generate table rows dynamically -->
-        <tr @click="callbackRow(index)" v-for="(row, index) in rows" :key="index"
-          class="hover:bg-dark_opacity dark:hover:bg-gray_dark">
-          <!-- <td v-for="(value, key) in row" :key="key" class="px-3 sm:px-6 border py-4 whitespace-nowrap text-center max-w-4 overflow-hidden sm:overflow-auto hover:max-w-max">{{ value }}</td> -->
-          <td v-for="(value, key) in row" :key="key" class="px-6 py-4 whitespace-nowrap">
-            <slot name="default" :value="value" :key="key" :row="row">
-              {{ value }}
-            </slot>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-  </div>
   </Transition>
 </template>
 
 
 <style scoped>
-
-
 .v-enter-active,
 .v-leave-active {
   transition: opacity 0.3s ease;
@@ -119,5 +150,4 @@ const isFiltersActive = ref(false)
 .v-leave-to {
   opacity: 0;
 }
-
 </style>

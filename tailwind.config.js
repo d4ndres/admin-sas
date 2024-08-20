@@ -16,7 +16,7 @@ export default {
       transparent: 'transparent',
       vainilla: '#FFF5E0',
       dark: 'rgba(31, 31, 31, 1)',
-      dark_opacity: 'rgba(31, 31, 31, 0.5)',
+      dark_opacity: 'rgba(31, 31, 31, 0.7)',
       gray: '#d9d9db',
       gray_dark: '#444444',
       gray_dark_font: '#bfbfbf',
