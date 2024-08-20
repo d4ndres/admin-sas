@@ -32,17 +32,47 @@ const headers = computed(() => {
   else {
     headers = Object.keys(props.data[0]);
   }
-  headers = headers.map(header => {
-    return {
-      name: header,
-    }
-  })
+
   return headers
 });
 
+
+const sortByColumn = ref(null)
 const rows = computed(() => {
-  return props.data
+  return props.data.filter((row) => {
+    return Object.values(row).some((value) => {
+      return value?.toString().toLowerCase().includes(searchFilter.value.toLowerCase())
+    })
+  })
+    .sort((a, b) => {
+      if (sortByColumn.value) {
+        if (sortByColumn.value.asc) {
+          return a[sortByColumn.value.column] > b[sortByColumn.value.column] ? 1 : -1
+        }
+        else {
+          return a[sortByColumn.value.column] < b[sortByColumn.value.column] ? 1 : -1
+        }
+      }
+      return 0
+    })
 });
+
+
+const deepEqual = (obj1, obj2) => {
+  return JSON.stringify(obj1) === JSON.stringify(obj2)
+}
+
+const sortByContent = ({ column, asc }) => {
+  if (deepEqual(sortByColumn.value, { column, asc })) {
+    sortByColumn.value = null
+  }
+  else {
+    sortByColumn.value = {
+      column,
+      asc
+    }
+  }
+}
 
 const callbackRow = (index) => {
   // console.log('Row clicked', index)
@@ -50,9 +80,9 @@ const callbackRow = (index) => {
     props.callbacksRow[index]()
   }
 }
+const isFiltersActive = ref(true)
 
-const isFiltersActive = ref(false)
-
+const searchFilter = ref('')
 </script>
 
 
@@ -61,59 +91,46 @@ const isFiltersActive = ref(false)
     <div class="w-full h-full overflow-auto" v-if="headers.length">
       <!--border border-gray dark:border-gray_dark -->
       <div class="flex top-0 bg-vainilla dark:bg-dark" v-if="!hideControls">
-        
-        <div class="relative ">
-          <Popover>
-            <template #default="{showPopover}">
-              <div 
-              :class="{'bg-gray dark:bg-gray_dark' : showPopover}"
-              class="px-2 py-1 transition-all duration-300 cursor-pointer hover:bg-gray dark:hover:bg-gray_dark shadow-[0_0_1px_1px_inset] shadow-gray dark:shadow-gray_dark">
-                Columnas
-              </div>
-            </template>
-            <template #popover>
-              <NavItem class="bg-gray dark:bg-gray_dark shadow-sm shadow-gray_dark tracking-normal capitalize text-nowrap">Ordenar de A a la Z</NavItem>
-              <NavItem class="bg-gray dark:bg-gray_dark shadow-sm shadow-gray_dark tracking-normal capitalize text-nowrap">Ordenar de A a la Z</NavItem>
-              <NavItem class="bg-gray dark:bg-gray_dark shadow-sm shadow-gray_dark tracking-normal capitalize text-nowrap">Ordenar de A a la Z</NavItem>
-              <NavItem class="bg-gray dark:bg-gray_dark shadow-sm shadow-gray_dark tracking-normal capitalize text-nowrap">Ordenar de A a la Z</NavItem>
-              <NavItem class="bg-gray dark:bg-gray_dark shadow-sm shadow-gray_dark tracking-normal capitalize text-nowrap">Ordenar de A a la Z</NavItem>
-              <NavItem class="bg-gray dark:bg-gray_dark shadow-sm shadow-gray_dark tracking-normal capitalize text-nowrap">Ordenar de A a la Z</NavItem>
 
-            </template>
-          </Popover>
+        <div class="mb-1">
+          <FormInput v-model="searchFilter" placeholder="Filtrar por contenido"/>
         </div>
 
-        <div @click="isFiltersActive = !isFiltersActive" :class="{ 'bg-gray dark:bg-gray_dark': isFiltersActive }"
+        <!-- <div @click="isFiltersActive = !isFiltersActive" :class="{ 'bg-gray dark:bg-gray_dark': isFiltersActive }"
           class="px-2 py-1 transition-all duration-300 cursor-pointer hover:bg-gray dark:hover:bg-gray_dark shadow-[0_0_1px_1px_inset] shadow-gray dark:shadow-gray_dark">
           Filtros
-        </div>
+        </div> -->
+
       </div>
 
       <table
         class="min-w-full transition-all duration-300 shadow-[0_0_1px_1px_inset] shadow-gray dark:shadow-gray_dark">
         <thead>
-          <tr
-            class="top-8 bg-vainilla dark:bg-dark shadow-[0_0_1px_1px_inset] shadow-gray dark:shadow-gray_dark">
+          <tr class="top-8 bg-vainilla dark:bg-dark shadow-[0_0_1px_1px_inset] shadow-gray dark:shadow-gray_dark">
             <!-- Generate table header dynamically -->
             <th v-for="(header, index) in headers" :key="index"
               class="relative px-6 py-3 duration-300 text-left text-xs font-semibold uppercase tracking-wider">
               <span class="">
-                {{ header.name }}
+                {{ header }}
               </span>
 
               <div class="absolute top-0 bottom-0 right-1 flex items-center">
-                <Popover >
-                  <template #default="{showPopover}">
-                    <div v-show="isFiltersActive"
-                      :class="{'bg-gray dark:bg-gray_dark' : showPopover}"
+                <Popover>
+                  <template #default="{ showPopover }">
+                    <div v-show="isFiltersActive" :class="{ 'bg-gray dark:bg-gray_dark': showPopover }"
                       class="p-1 flex justify-center items-center cursor-pointer hover:bg-gray hover:dark:bg-gray_dark ">
                       <Icon name="filter" />
                     </div>
                   </template>
-                  <template #popover >
-                    <NavItem class="bg-gray dark:bg-gray_dark shadow-sm shadow-gray_dark tracking-normal capitalize text-nowrap">Ordenar de A a la Z</NavItem>
-                    <NavItem class="bg-gray dark:bg-gray_dark shadow-sm shadow-gray_dark tracking-normal capitalize text-nowrap">Ordenar de Z a la A</NavItem>
-                    <NavItem class="bg-gray dark:bg-gray_dark shadow-sm shadow-gray_dark tracking-normal capitalize text-nowrap">Filtra por valores</NavItem>
+                  <template #popover>
+                    <NavItem @click="sortByContent({ column: header, asc: true })"
+                      class="bg-gray dark:bg-gray_dark shadow-sm shadow-gray_dark tracking-normal capitalize text-nowrap">
+                      Ordenar de A a la Z
+                    </NavItem>
+                    <NavItem @click="sortByContent({ column: header })"
+                      class="bg-gray dark:bg-gray_dark shadow-sm shadow-gray_dark tracking-normal capitalize text-nowrap">
+                      Ordenar de Z a la A
+                    </NavItem>
                   </template>
                 </Popover>
               </div>

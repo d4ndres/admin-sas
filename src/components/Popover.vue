@@ -56,7 +56,6 @@ onUnmounted(() => {
     left-0 md:left-auto
     md:bottom-auto 
     bottom-0 md:top-full
-    bg-dark_opacity 
     shadow-[0_0_0px_100vh_#000000CC] md:shadow-none 
     z-50
     " :class="{ 'right-0' : isGreaterThanScreenWidth }">
