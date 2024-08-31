@@ -1,5 +1,6 @@
 import {defineStore} from 'pinia'
 import {ref} from 'vue'
+
 export const useControlAsideStore = defineStore('controlAside', () => {
   const isMinimalist = ref<boolean>(false);
   const isAsideOpen = ref<boolean>(true);

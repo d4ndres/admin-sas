@@ -16,14 +16,14 @@ const navList = [
 const username = computed(() => 'admin');
 
 
-const { auth } = useSupabaseClient()
+// const { auth } = useSupabaseClient()
 const logout = async () => {
-  const something = await auth.signOut()
-  if(something.error) {
-    console.log('logout', something);
-  }
-  localStorage.removeItem('user')
-  return navigateTo('/')
+  // const something = await auth.signOut()
+  // if(something.error) {
+  //   console.log('logout', something);
+  // }
+  // localStorage.removeItem('user')
+  // return navigateTo('/')
 }
 
 

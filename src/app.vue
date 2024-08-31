@@ -1,5 +1,6 @@
-<script setup>
-onBeforeMount( () => {
+<script>
+
+onMounted(() => {
   const darkMode = localStorage.getItem('darkMode')
   if (darkMode === 'true') {
     document.documentElement.classList.add('dark')
@@ -8,7 +9,5 @@ onBeforeMount( () => {
 </script>
 
 <template>
-  <div class="transition-all duration-0">
-    <NuxtPage />
-  </div>
+  <NuxtPage />
 </template>
