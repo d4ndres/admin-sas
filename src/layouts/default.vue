@@ -17,15 +17,15 @@ onMounted(() => {
 const navList = [
   { path: '/admin/dashboard', text: 'Dashboard', icon: 'home-outline' },
   { path: '/admin/devices', text: 'Devices', icon: 'address-card' },
-  { path: '/admin/alarms', text: 'Alarms', icon: 'clippy' },
-  { path: '/admin/templates', text: 'Templates', icon: 'clock' },
+  { path: '/admin/alarms', text: 'Alarms', icon: 'clock' },
+  { path: '/admin/templates', text: 'Templates', icon: 'clippy' },
 ]
 
 </script>
 
 <template>
-  <div class="bg-background  flex md:flex-row flex-col-reverse h-[100vh] transition-[background] duration-300">
-    <NavList class="border-r border-gray flex md:flex-col transition-all duration-300" :class="{
+  <div class="bg-background  flex md:flex-row flex-col-reverse h-[100vh] transition-[background]">
+    <NavList class="border-r border-gray flex md:flex-col " :class="{
       'min-w-[250px] ': isAsideOpen,
       'min-w-[50px]': !isAsideOpen
     }">
