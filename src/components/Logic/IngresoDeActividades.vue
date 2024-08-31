@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { useMainStore } from '~/Store/MainStore';
 const store = useMainStore()
 const {
@@ -219,4 +219,4 @@ const submitAddActividad = (ev) => {
     scale: 1;
   }
 }
-</style>
+</style> -->

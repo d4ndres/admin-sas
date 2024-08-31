@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 // import { useSession } from '~/Store/Session';
 import { useMainStore } from '~/Store/MainStore';
 
@@ -56,4 +56,4 @@ const submitIngresoCombustible = (ev) => {
       <FormInput required :disabled="sending" id="valorTotal" name="valorTotal" type="currency"/>
     </FormInputWrapper>
   </form>
-</template>
+</template> -->

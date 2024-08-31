@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { useMainStore } from '~/Store/MainStore';
 const store = useMainStore()
 
@@ -91,4 +91,4 @@ const sending = ref(false)
       <FormInput required :disabled="sending" id="cantidadDeCombustibleDepositada" name="cantidadDeCombustibleDepositada" type="number" />
     </FormInputWrapper>
   </form>
-</template>
+</template> -->

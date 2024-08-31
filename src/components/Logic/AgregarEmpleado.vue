@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { useMainStore } from '~/Store/MainStore';
 const store = useMainStore()
 const {pushElementToEmpleado} = store
@@ -34,4 +34,4 @@ const submit = (ev) => {
       <FormInput required :disabled="sending" id="especialidad" name="especialidad" type="text" />
     </FormInputWrapper>
   </form>
-</template>
+</template> -->
