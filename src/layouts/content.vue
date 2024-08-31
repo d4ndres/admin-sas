@@ -7,7 +7,7 @@ const layoutCustomProps = useAttrs()
   <div class="h-[100vh] flex flex-col ">
     <slot name="header">
       <header class="min-h-12 border-b border-gray dark:border-gray_dark transition-all duration-300 flex items-center justify-between px-4">
-        <h2 class="text-2xl">
+        <h2 class="text-2xl text-text_main uppercase">
           {{ layoutCustomProps.title }}
         </h2>
         <div class="flex gap-4">

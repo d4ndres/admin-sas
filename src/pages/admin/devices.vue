@@ -1,9 +1,20 @@
 <script setup>
 
+// schema devices
+// {
+//   name,
+//   dId
+//   templateName,
+//   templateId
+// }
+
+
 const agregarDispositivo = (ev) => {
   const fields = Object.fromEntries(new FormData(ev.target).entries())
   console.log(fields)
 }
+
+const sending = ref(false)
 
 </script>
 
@@ -11,7 +22,7 @@ const agregarDispositivo = (ev) => {
 
   <NuxtLayout name="content" title="Devices">
     <Card>
-      <h3 class="text-xl font-bold">Add new device</h3>
+      <h3 class="text-xl font-bold text-text_main">Add new device</h3>
       <form @submit.prevent="submit" id="agregarDispositivo">
         <div class="flex justify-between gap-4">
           <FormInputWrapper  label="Device name" for="deviceName">
@@ -21,13 +32,13 @@ const agregarDispositivo = (ev) => {
             <FormInput required :disabled="sending" id="deviceID" name="deviceID" type="text" />
           </FormInputWrapper>
           <FormInputWrapper label="Template" for="template">
-            <FormInput required :disabled="sending" id="template" name="template" type="text" />
+            <FormInput required :disabled="sending" id="template" name="template" type="select" :options="['Template 1', 'Template 2', 'Template 3']"/>
           </FormInputWrapper>
         </div>
-        <button type="submit" class="btn btn-primary" :disabled="sending">
+        <buttonMain type="submit" :disabled="sending">
           <span v-if="sending">Sending...</span>
           <span v-else>Send</span>
-        </button>
+        </buttonMain>
       </form>
     </Card>
   </NuxtLayout>
