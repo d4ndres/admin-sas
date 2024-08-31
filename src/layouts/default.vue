@@ -24,9 +24,8 @@ const navList = [
 </script>
 
 <template>
-  <div
-    class="flex md:flex-row flex-col-reverse h-[100vh] bg-background dark:text-gray_dark_font transition-[background] duration-300">
-    <NavList class="border-r border-gray dark:border-gray_dark flex md:flex-col transition-all duration-300" :class="{
+  <div class="bg-background text-text_main flex md:flex-row flex-col-reverse h-[100vh] transition-[background] duration-300">
+    <NavList class="border-r border-gray flex md:flex-col transition-all duration-300" :class="{
       'min-w-[250px] ': isAsideOpen,
       'min-w-[50px]': !isAsideOpen
     }">
