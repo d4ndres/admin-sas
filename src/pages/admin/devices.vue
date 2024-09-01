@@ -1,12 +1,17 @@
 <script setup>
 
-// schema devices
-// {
-//   name,
-//   dId
-//   templateName,
-//   templateId
-// }
+const maquetaDevices = ref([
+  { name: "Home", dId: "1234", templateName: "Power Sensor", templateId: "4das65d4as", saverRule: false},
+  {  name: "Office", dId: "8789", templateName: "Power Sensor", templateId: "56ad4s56", saverRule: false},
+  { name: "Farm", dId: "2364", templateName: "Power Sensor", templateId: "da467saw", saverRule: false},
+])
+const toggleSaverRule = (row) => {
+  const index = maquetaDevices.value.findIndex((device) => device.dId === row.dId)
+  maquetaDevices.value.splice(index, 1, {...row, saverRule: !row.saverRule})
+}
+
+
+const columnsTable = ["Name", "Device ID", "Template Name", "Template ID", "Actions"]
 
 
 const agregarDispositivo = (ev) => {
@@ -21,7 +26,7 @@ const sending = ref(false)
 <template>
 
   <NuxtLayout name="content" title="Devices">
-    <Card>
+    <Card class="mb-4">
       <h3 class="text-xl font-bold text-text_main">Add new device</h3>
       <form @submit.prevent="submit" id="agregarDispositivo">
         <div class="flex justify-between gap-4">
@@ -40,6 +45,18 @@ const sending = ref(false)
           <span v-else>Send</span>
         </buttonMain>
       </form>
+    </Card>
+
+    <Card>
+      <DataTable :data="maquetaDevices" >
+        <template #default="{value, key, row, rowIndex}"> 
+          <div v-if="key == 'saverRule'">
+            <!-- switch -->
+            <ButtonSwitch :value="value" @click="toggleSaverRule(row)"/>
+            <!-- delete -->
+          </div>
+        </template>
+      </DataTable>
     </Card>
   </NuxtLayout>
 </template>

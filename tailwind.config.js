@@ -33,6 +33,7 @@ export default {
       form_text: 'rgb(var(--color-form-text) / <alpha-value>)',
       variable: 'rgb(var(--color-variable) / <alpha-value>)',
       highlight: 'rgb(var(--color-highlight) / <alpha-value>)',
+      success: 'rgb(var(--color-success) / <alpha-value>)',
     }
   },
   plugins: [],
