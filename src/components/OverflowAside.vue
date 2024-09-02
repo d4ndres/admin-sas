@@ -16,8 +16,16 @@ const closeAside = () => {
 </script>
 
 <template>
-  <div v-if="props.modelValue" @mousedown="closeAside" class="bg-dark_opacity z-50 fixed bg-alternative h-full w-full left-0 top-0">
-    <div @mousedown.stop class="move bg-vainilla dark:bg-dark z-50 bg-overlay flex flex-col fixed inset-y-0 h-full lg:h-screen border-l dark:border-gray_dark border-overlay shadow-xl  w-screen max-w-2xl  right-0 ">
+<!-- 
+class="bg-background_alt/10 backdrop-blur-sm fixed h-full w-full left-0 top-0 z-50">
+    <div @mousedown.stop 
+    class="bg-background_body fixed h-full z-50 right-0 w-screen md:w-1/2 shadow-2xl shadow-black
+    flex flex-col border border-border border-x-0 border-y-2 p-4
+-->
+
+<div v-if="props.modelValue" @mousedown="closeAside" class="bg-background_alt/10 backdrop-blur-sm fixed h-full w-full left-0 top-0 z-50">
+    <div @mousedown.stop class="move bg-background_body fixed h-full z-50 right-0 w-screen md:w-1/2 shadow-2xl shadow-black
+    flex flex-col border border-border border-x-0 border-y-2">
       <div class="px-4 flex items-center h-14 border-b dark:border-gray_dark">
         <slot name="header"></slot>
       </div>

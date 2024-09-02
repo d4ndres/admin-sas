@@ -19,15 +19,12 @@ const toggleEstado = (row) => {
 </script>
 
 <template>
-  <HeaderDashboard>
-    Empleados
+  <NuxtLayout  name="content" title="Empleados">
     <template #buttons>
       <ButtonAction @click="showModal = true" >
         Nuevo registro
       </ButtonAction>
     </template>
-  </HeaderDashboard>
-  <NuxtLayout  name="content">
     <DataTable :data="getEmpleadosToTable" :columns="['id', 'Empleados', 'Especialidad', 'Estado']">
       <template #default="{ row, key, value }">
         <ButtonSwitch v-if="key == 'estado'" :value="value" @input="toggleEstado(row)"/>

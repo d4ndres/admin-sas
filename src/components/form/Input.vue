@@ -75,5 +75,5 @@ const inputClass = `
   </select>
   <input v-else-if="type == 'checkbox'" :type="type" />
   <input v-else-if="type == 'currency'" inputmode="numeric" type="currency" :value="modelValue" @input="handleInputCurrency"  :class="inputClass"/>
-  <input v-else :type="type" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)"  :class="inputClass" />
+  <input v-else :type="type" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)"  :class="inputClass" autocomplete="off" />
 </template>

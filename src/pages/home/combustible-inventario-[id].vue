@@ -20,11 +20,7 @@ console.log(combustible_id)
 
 
 <template>
-  <HeaderDashboard>
-    Combustibles Historial
-  </HeaderDashboard>
-
-  <NuxtLayout  name="content">
+  <NuxtLayout  name="content" title="Combustibles Historial">
     <DataTable :data="showCombustiblesHistorialToTable(combustible_id)" />
   </NuxtLayout>
 </template>
