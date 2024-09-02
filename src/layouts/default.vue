@@ -4,22 +4,20 @@ const store = useControlAsideStore()
 const { isAsideOpen, isMinimalist } = storeToRefs(store)
 const { setMinimalist } = store
 
-onMounted(() => {
-  const handleResize = () => {
-    store.setAsideOpen(window.innerWidth > 768);
-    setMinimalist(window.innerWidth < 768)
-  };
-  handleResize();
-  window.addEventListener('resize', handleResize); // Actualizar el valor de isExpanded cuando se cambie el tamaño de la ventana
-});
+// onMounted(() => {
+//   const handleResize = () => {
+//     store.setAsideOpen(window.innerWidth > 768);
+//     setMinimalist(window.innerWidth < 768)
+//   };
+//   handleResize();
+//   window.addEventListener('resize', handleResize); // Actualizar el valor de isExpanded cuando se cambie el tamaño de la ventana
+// });
 
-
-const navList = [
-  { path: '/admin/dashboard', text: 'Dashboard', icon: 'home-outline' },
-  { path: '/admin/devices', text: 'Devices', icon: 'address-card' },
-  { path: '/admin/alarms', text: 'Alarms', icon: 'clock' },
-  { path: '/admin/templates', text: 'Templates', icon: 'clippy' },
-]
+defineProps({
+  navItems: {
+    type: Array,
+  }
+})
 
 </script>
 
@@ -29,7 +27,7 @@ const navList = [
       'min-w-[250px] ': isAsideOpen,
       'min-w-[50px]': !isAsideOpen
     }">
-      <RouterLink v-for="item in navList" :key="item.path" :to="item.path">
+      <RouterLink v-for="item in navItems" :key="item.path" :to="item.path">
         <NavItem :isExpanded="isAsideOpen" :dataItem="item" />
       </RouterLink>
 
