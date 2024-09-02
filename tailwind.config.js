@@ -34,6 +34,9 @@ export default {
       variable: 'rgb(var(--color-variable) / <alpha-value>)',
       highlight: 'rgb(var(--color-highlight) / <alpha-value>)',
       success: 'rgb(var(--color-success) / <alpha-value>)',
+      white: 'rgb(var(--color-white) / <alpha-value>)',
+      black: 'rgb(var(--color-black) / <alpha-value>)',
+      danger: 'rgb(var(--color-danger) / <alpha-value>)',
     }
   },
   plugins: [],

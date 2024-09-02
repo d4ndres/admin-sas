@@ -25,6 +25,9 @@
     --color-variable: 57 163 60;
     --color-highlight: 255 255 0;
     --color-success: 70 207 127;
+    --color-white: 255 255 255;
+    --color-black: 0 0 0;
+    --color-danger: 207 50 50;
 
   }
 
@@ -50,6 +53,9 @@
     --color-variable: 219 64 227;
     --color-highlight: 239 219 67;
     --color-success: 2 117 48;
+    --color-white: 255 255 255;
+    --color-black: 0 0 0;
+    --color-danger: 138 32 32;
   }
 }
 

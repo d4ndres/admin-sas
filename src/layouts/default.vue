@@ -23,19 +23,25 @@ defineProps({
 
 <template>
   <div class="bg-background text-text_main flex md:flex-row flex-col-reverse h-[100vh] transition-[background]">
-    <NavList class="border-r border-gray flex md:flex-col " :class="{
+    <NavList class="border-r border-border flex md:flex-col " :class="{
       'min-w-[250px] ': isAsideOpen,
       'min-w-[50px]': !isAsideOpen
     }">
-      <RouterLink v-for="item in navItems" :key="item.path" :to="item.path">
+      <RouterLink 
+      v-for="item in navItems" :key="item.path" :to="item.path">
         <NavItem :isExpanded="isAsideOpen" :dataItem="item" />
       </RouterLink>
 
     </NavList>
 
-    <!-- <HeaderDashboard /> -->
     <main class="w-full h-full overflow-auto">
       <slot></slot>
     </main>
   </div>
 </template>
+
+<style scoped>
+.router-link-active {
+  background: theme('colors.background_body');
+}
+</style>
