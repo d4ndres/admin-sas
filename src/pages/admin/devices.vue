@@ -2,16 +2,23 @@
 
 const maquetaDevices = ref([
   { name: "Home", dId: "1234", templateName: "Power Sensor", templateId: "4das65d4as", saverRule: false},
-  {  name: "Office", dId: "8789", templateName: "Power Sensor", templateId: "56ad4s56", saverRule: false},
   { name: "Farm", dId: "2364", templateName: "Power Sensor", templateId: "da467saw", saverRule: false},
+  { name: "Farm", dId: "213", templateName: "Power Sensor", templateId: "da467saw", saverRule: false},
 ])
-const toggleSaverRule = (row) => {
-  const index = maquetaDevices.value.findIndex((device) => device.dId === row.dId)
-  maquetaDevices.value.splice(index, 1, {...row, saverRule: !row.saverRule})
+const toggleSaverRule = (rowIndex) => {
+  const row = maquetaDevices.value[rowIndex]
+  maquetaDevices.value.splice(rowIndex, 1, {...row, saverRule: !row.saverRule})
 }
 
-
-const columnsTable = ["Name", "Device ID", "Template Name", "Template ID", "Actions"]
+const columnsTable = [
+  // { bindKey: "name", text: "Name" },
+  { text: "Full name", autoValue: (row) => `${row.name} ${row.dId}` },
+  // { bindKey: "dId", text: "Device ID" },
+  // { bindKey: "templateName", text: "Template Name" },
+  // { bindKey: "templateId", text: "Template ID" },
+  { bindKey: "actions", text: "Actions" },
+  { bindKey: "saverRule", text: "save on DB" },
+]
 
 
 const agregarDispositivo = (ev) => {
@@ -47,13 +54,23 @@ const sending = ref(false)
       </form>
     </Card>
 
+    <Card class="mb-4">
+      <EasyTable :data="maquetaDevices" :columns="columnsTable">
+        <template #default="{value, key, row, rowIndex}"> 
+          <div v-if="key == 'actions'">
+            <ButtonSwitch :value="row.saverRule" @click="toggleSaverRule(rowIndex)"/>
+          </div>
+        </template>
+      </EasyTable>
+    </Card>
+
     <Card>
       <DataTable :data="maquetaDevices" >
         <template #default="{value, key, row, rowIndex}"> 
           <div v-if="key == 'saverRule'">
-            <!-- switch -->
-            <ButtonSwitch :value="value" @click="toggleSaverRule(row)"/>
-            <!-- delete -->
+            
+            <ButtonSwitch :value="value" @click="toggleSaverRule(rowIndex)"/>
+            
           </div>
         </template>
       </DataTable>
