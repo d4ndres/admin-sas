@@ -28,8 +28,7 @@ let showModalGastoCombustible = ref(false);
 </script>
 
 <template>
-  <HeaderDashboard>
-    Combustibles
+  <NuxtLayout  name="content" title="Combustibles">
     <template #buttons>
       <ButtonAction type="down" @click="showModalGastoCombustible = !showModalGastoCombustible">
         Gastos
@@ -38,9 +37,6 @@ let showModalGastoCombustible = ref(false);
         Ingresos
       </ButtonAction>
     </template>
-  </HeaderDashboard>
-
-  <NuxtLayout  name="content">
     <DataTable :data="showCombustiblesToTable" :callbacksRow="callbacksRow" />
   </NuxtLayout>
 

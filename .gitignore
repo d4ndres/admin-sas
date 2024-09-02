@@ -1,5 +1,6 @@
 /meeting
-
+.yarn/
+.yarnrc.yml
 
 # Nuxt dev/build outputs
 .output

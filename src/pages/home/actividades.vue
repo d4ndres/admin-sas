@@ -17,14 +17,10 @@ let showModal = ref(false);
 
 
 <template>
-  <HeaderDashboard>
-    Actividades
-
+  <NuxtLayout name="content" title="Actividades">
     <template #buttons>
       <ButtonAction @click="showModal = !showModal" />
     </template >
-  </HeaderDashboard>
-  <NuxtLayout name="content">
     <DataTable :data="showHistorialDeActividadesToTable" />
   </NuxtLayout>
 

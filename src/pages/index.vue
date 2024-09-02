@@ -31,7 +31,7 @@ const signIn = ( ev ) => {
 
 <template>
   <div class="h-[100vh] w-full bg-lime-100 flex justify-center items-center bg-[url('/assets/images/login_bg.jpg')] bg-cover bg-center">
-    <div class="w-[300px] min-h-[350px] bg-white dark:bg-dark dark:text-gray_dark_font p-4 pt-0 flex flex-col shadow-xl">
+    <card class="w-[300px] min-h-[350px] pt-0 flex flex-col shadow-xl">
       <div class="text-center flex-grow flex justify-center items-center flex-col min-h-[5rem]">
         <span>
           Actualización digital
@@ -46,6 +46,6 @@ const signIn = ( ev ) => {
         </FormInputWrapper>
         <button class="bg-lime-500 p-2 rounded-md border border-1 dark:border-gray_dark">Iniciar sección</button>
       </form>
-    </div>
+    </card>
   </div>
 </template>
