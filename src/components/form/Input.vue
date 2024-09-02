@@ -58,17 +58,22 @@ const handleInputCurrency = (ev) => {
   emit('update:modelValue', currency)
 }
 
+const inputClass = `
+  px-2 py-1 w-full 
+  bg-background text-text_main rounded-md
+  outline-none border border-border focus:border-focus
+`
+
 </script>
 
 <template>
-  <select v-if="type == 'select'" :value="modelValue" @input="emitInput"
-    class="shadow-[0_0_1px_1px_inset] shadow-gray dark:shadow-gray_dark focus:shadow-green dark:focus:shadow-green_light outline-none dark:bg-dark bg-transparent rounded-md  px-2 py-1 w-full">
+  <select v-if="type == 'select'" :value="modelValue" @input="emitInput" :class="inputClass">
     <option  v-if="optionsIsPrimitive" v-for="(option, index) in options" :key="option + index" :value="option">
       {{ option }}</option>
     <option v-else v-for="(option, index) in options" :key="option[setElementOptionValue] + index"
       :value="option[setElementOptionValue]">{{ option[setElementOptionLabel] }}</option>
   </select>
   <input v-else-if="type == 'checkbox'" :type="type" />
-  <input v-else-if="type == 'currency'" inputmode="numeric" type="currency" :value="modelValue" @input="handleInputCurrency" class="shadow-[0_0_1px_1px_inset] shadow-gray dark:shadow-gray_dark focus:shadow-green dark:focus:shadow-green_light outline-none text-darkoutline-none bg-transparent rounded-md  px-2 py-1 w-full"/>
-  <input v-else :type="type" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" class="shadow-[0_0_1px_1px_inset] shadow-gray dark:shadow-gray_dark focus:shadow-green dark:focus:shadow-green_light outline-none text-darkoutline-none bg-transparent rounded-md  px-2 py-1 w-full" />
+  <input v-else-if="type == 'currency'" inputmode="numeric" type="currency" :value="modelValue" @input="handleInputCurrency"  :class="inputClass"/>
+  <input v-else :type="type" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)"  :class="inputClass" />
 </template>

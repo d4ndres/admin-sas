@@ -1,21 +1,20 @@
 <script setup >
-// import { useSession } from '~/Store/Session';
-// const storeSession = useSession()
-
-
 definePageMeta({
   middleware: 'authenticated'
 })
 
-onMounted(() => {
-  // const user = JSON.parse(localStorage.getItem('user'))
-  // storeSession.setUser(user)
-})
+const navItems = [
+  { path: '/home', text: 'Home', icon: 'home-outline' },
+  { path: '/home/empleados', text: 'Empleados', icon: 'address-card' },
+  { path: '/home/actividades', text: 'Actividades', icon: 'clippy' },
+  { path: '/home/horas_extra', text: 'Horas extra', icon: 'clock' },
+  { path: '/home/combustibles', text: 'Combustibles', icon: 'oil' }
+]
 
 </script>
 
 <template>
-  <NuxtLayout>
+  <NuxtLayout :navItems="navItems">
     <NuxtPage></NuxtPage>
   </NuxtLayout>
 </template>

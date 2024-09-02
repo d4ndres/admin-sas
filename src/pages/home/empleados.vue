@@ -30,7 +30,7 @@ const toggleEstado = (row) => {
   <NuxtLayout  name="content">
     <DataTable :data="getEmpleadosToTable" :columns="['id', 'Empleados', 'Especialidad', 'Estado']">
       <template #default="{ row, key, value }">
-        <ButtonState v-if="key == 'estado'" :value="value" @input="toggleEstado(row)"/>
+        <ButtonSwitch v-if="key == 'estado'" :value="value" @input="toggleEstado(row)"/>
       </template>
     </DataTable>
   </NuxtLayout>
