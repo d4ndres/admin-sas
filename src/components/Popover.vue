@@ -51,6 +51,8 @@ onUnmounted(() => {
 
     </slot>
     <div v-show="showPopover" class="
+    bg-transparent backdrop-blur-lg
+
     fixed md:absolute 
     w-full md:w-fit 
     left-0 md:left-auto

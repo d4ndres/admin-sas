@@ -15,7 +15,8 @@
     "@pinia/nuxt": "0.5.1",
     "nuxt": "3.12.3",
     "pinia": "2.1.7",
-    "vue": "latest"
+    "vue": "latest",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
   },
   "devDependencies": {
     "autoprefixer": "10.4.19",

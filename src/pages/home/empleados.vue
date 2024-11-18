@@ -1,15 +1,24 @@
 <script setup>
 import { useMainStore } from '~/Store/MainStore';
 const store = useMainStore()
-const {setEmpleados, toggleStateEmpleadosFromTable} = store
-const {getEmpleadosToTable} = storeToRefs(store)
+const { setEmpleados, toggleStateEmpleadosFromTable } = store
+const { getEmpleadosToTable } = storeToRefs(store)
 
 onMounted(() => {
   $fetch(`/api/empleados`)
-  .then(({data}) => {
-    setEmpleados(data)
-  })
+    .then(({ data }) => {
+      setEmpleados(data)
+    })
 })
+
+const columns = [
+  { bindKey: 'id', text: '#' },
+  { bindKey: 'nombre', text: 'Nombre' },
+  { bindKey: 'especialidad', text: 'Especialidad' },
+  { bindKey: 'estado', text: 'Estado' },
+  { autoValue: () => 'estadoController', text: 'Controller' }
+]
+
 
 const showModal = ref(false)
 
@@ -22,17 +31,28 @@ const toggleEstado = (row) => {
   <HeaderDashboard>
     Empleados
     <template #buttons>
-      <ButtonAction @click="showModal = true" >
+      <ButtonAction @click="showModal = true">
         Nuevo registro
       </ButtonAction>
     </template>
   </HeaderDashboard>
-  <NuxtLayout  name="content">
-    <DataTable :data="getEmpleadosToTable" :columns="['id', 'Empleados', 'Especialidad', 'Estado']">
-      <template #default="{ row, key, value }">
-        <ButtonState v-if="key == 'estado'" :value="value" @input="toggleEstado(row)"/>
+  <NuxtLayout name="content">
+
+
+
+    <WrapperTablon :data="getEmpleadosToTable" :columns="columns">
+      <template #default="{ searchFilter, data, columns }">
+        <Tablon :data="data" :columns="columns" :searchFilter="searchFilter">
+          <template #default="{ bindKey, value, row }">
+            <StateIndicator v-if="bindKey == 'estado'" :state="value == true ? 'success' : 'danger'">
+              {{ value ? 'Activo' : 'Inactivo' }}
+            </StateIndicator>
+            <ButtonState v-if="bindKey == 'Controller'" :value="row.estado" @input="toggleEstado(row)" />
+          </template>
+        </Tablon>
       </template>
-    </DataTable>
+    </WrapperTablon>
+
   </NuxtLayout>
 
   <OverflowAside v-model="showModal">
