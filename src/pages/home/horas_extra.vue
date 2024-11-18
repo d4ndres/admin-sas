@@ -11,6 +11,14 @@ onMounted(() => {
   })
 })
 
+const columns = [
+  { bindKey: 'id', text: 'Id' },
+  { bindKey: 'fecha', text: 'Fecha' },
+  { bindKey: 'empleado', text: 'Empleado' },
+  { bindKey: 'actividad', text: 'Actividad' },
+  { bindKey: 'horaInicio', text: 'Hora inicio' },
+  { bindKey: 'horaSalida', text: 'Hora salida' },
+]
 
 
 </script>
@@ -21,6 +29,10 @@ onMounted(() => {
     Horas extra
   </HeaderDashboard>
   <NuxtLayout  name="content">
-    <DataTable :data="showHorasExtraToTable" />
+    <WrapperTablon :data="showHorasExtraToTable" :columns="columns" >
+      <template #default="{ data, columns, searchFilter }">
+        <Tablon :data="data" :columns="columns" :searchFilter="searchFilter"></Tablon>
+      </template>
+    </WrapperTablon>
   </NuxtLayout>
 </template>

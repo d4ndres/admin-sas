@@ -12,7 +12,7 @@ onMounted(() => {
 })
 
 const columns = [
-  { bindKey: 'id', text: '#' },
+  { bindKey: 'id', text: 'Id' },
   { bindKey: 'nombre', text: 'Nombre' },
   { bindKey: 'especialidad', text: 'Especialidad' },
   { bindKey: 'estado', text: 'Estado' },
@@ -33,18 +33,17 @@ const rowsSelected = ref([])
 <template>
   <HeaderDashboard>
     Empleados
-    <template #buttons>
-      <ButtonAction @click="showModal = true">
-        Nuevo registro
-      </ButtonAction>
-    </template>
   </HeaderDashboard>
   <NuxtLayout name="content">
     <WrapperTablon :data="getEmpleadosToTable" :columns="columns">
       <template #customControllers>
-        <ButtonTablon state="disabled">
+        <ButtonTablon :state="rowsSelected.length ? '' : 'disabled'">
           Eliminar
           <Icon name="trash" />
+        </ButtonTablon>
+        <ButtonTablon @click="showModal = true">
+          Crear
+          <Icon name="add" />
         </ButtonTablon>
       </template>
       <template #default="{ searchFilter, data, columns }">

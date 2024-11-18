@@ -12,6 +12,16 @@ onMounted(() => {
 
 });
 
+const columns = [
+  { bindKey: 'id', text: 'Id' },
+  { bindKey: 'fecha', text: 'Fecha' },
+  { bindKey: 'empleado', text: 'Empleado' },
+  { bindKey: 'actividad', text: 'Actividad' },
+  { bindKey: 'lote', text: 'Lote' },
+  { bindKey: 'semilla', text: 'Semilla' },
+]
+
+
 let showModal = ref(false);
 </script>
 
@@ -19,13 +29,20 @@ let showModal = ref(false);
 <template>
   <HeaderDashboard>
     Actividades
-
-    <template #buttons>
-      <ButtonAction @click="showModal = !showModal" />
-    </template >
   </HeaderDashboard>
   <NuxtLayout name="content">
-    <DataTable :data="showHistorialDeActividadesToTable" />
+    
+    <WrapperTablon :data="showHistorialDeActividadesToTable" :columns="columns">
+      <template #customControllers>
+        <ButtonTablon @click="showModal = true">
+          Crear
+          <Icon name="add" />
+        </ButtonTablon>
+      </template>
+      <template #default="{ data, columns, searchFilter }">
+        <Tablon :data="data" :columns="columns" :searchFilter="searchFilter"></Tablon>
+      </template>
+    </WrapperTablon>
   </NuxtLayout>
 
   <OverflowAside v-model="showModal">
