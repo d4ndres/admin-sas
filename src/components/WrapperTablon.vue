@@ -48,28 +48,28 @@ const downloadTable = () => {
       <div class="">
         <FormInput v-model="searchFilter" placeholder="Filtrar por contenido" />
       </div>
-      <div class="flex gap-2 ">
-        <popover>
-          <div class="border border-gray_dark flex items-center rounded-lg px-2 gap-2 cursor-pointer h-full">
-            Columnas
-            <Icon name="columns"></Icon>
-          </div>
-          <template #popover>
-            <div v-for="column in columnsRef" :key="column + '_controller'"
-              class="border border-gray_dark flex items-center p-1 px-4 gap-2 cursor-pointer h-full hover:bg-gray-900/10 "
-              @click="toggleColumn(column)" :class="{ 'line-through': !column.active }">
-              {{ column.text }}
-            </div>
-          </template>
-        </popover>
-
-
-
-
-        <div @click="downloadTable"
-          class="border border-gray_dark flex items-center rounded-lg px-2 gap-2 cursor-pointer h-full">
-          Descargar
-          <Icon name="download"></Icon>
+      <div class="flex gap-2 flex-wrap">
+        <div class="flex gap-2">
+          <popover>
+            <ButtonTablon class="h-full">
+              Columnas
+              <Icon name="columns"></Icon>
+            </ButtonTablon>
+            <template #popover>
+              <ButtonTablon v-for="column in columnsRef" :key="column + '_controller'"
+                class="rounded-none p-1 px-4 hover:bg-gray-900/10 "
+                @click="toggleColumn(column)" :class="{ 'line-through': !column.active }">
+                {{ column.text }}
+              </ButtonTablon>
+            </template>
+          </popover>
+          <ButtonTablon class="h-full" @click="downloadTable" >
+            Descargar
+            <Icon name="download"></Icon>
+          </ButtonTablon>
+        </div>
+        <div class="flex gap-2">
+          <slot name="customControllers"></slot>
         </div>
 
       </div>

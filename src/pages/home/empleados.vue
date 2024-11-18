@@ -41,6 +41,12 @@ const rowsSelected = ref([])
   </HeaderDashboard>
   <NuxtLayout name="content">
     <WrapperTablon :data="getEmpleadosToTable" :columns="columns">
+      <template #customControllers>
+        <ButtonTablon state="disabled">
+          Eliminar
+          <Icon name="trash" />
+        </ButtonTablon>
+      </template>
       <template #default="{ searchFilter, data, columns }">
         <Tablon :data="data" :columns="columns" :searchFilter="searchFilter" v-model="rowsSelected">
           <template #default="{ bindKey, value, row }">

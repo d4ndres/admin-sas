@@ -36,6 +36,7 @@ const compare = (a, z) => {
 }
 
 const isSelectedAll = computed(() => {
+  if(!filterData.value.length) return false
   return filterData.value.every(item => isSelected(item));
 })
 
