@@ -16,7 +16,7 @@ const columns = [
   { bindKey: 'nombre', text: 'Nombre' },
   { bindKey: 'especialidad', text: 'Especialidad' },
   { bindKey: 'estado', text: 'Estado' },
-  { autoValue: () => 'estadoController', text: 'Controller' }
+  { autoValue: () => null, text: 'Controller' }
 ]
 
 
@@ -25,6 +25,9 @@ const showModal = ref(false)
 const toggleEstado = (row) => {
   toggleStateEmpleadosFromTable(row)
 }
+
+const rowsSelected = ref([])
+
 </script>
 
 <template>
@@ -37,12 +40,9 @@ const toggleEstado = (row) => {
     </template>
   </HeaderDashboard>
   <NuxtLayout name="content">
-
-
-
     <WrapperTablon :data="getEmpleadosToTable" :columns="columns">
       <template #default="{ searchFilter, data, columns }">
-        <Tablon :data="data" :columns="columns" :searchFilter="searchFilter">
+        <Tablon :data="data" :columns="columns" :searchFilter="searchFilter" v-model="rowsSelected">
           <template #default="{ bindKey, value, row }">
             <StateIndicator v-if="bindKey == 'estado'" :state="value == true ? 'success' : 'danger'">
               {{ value ? 'Activo' : 'Inactivo' }}

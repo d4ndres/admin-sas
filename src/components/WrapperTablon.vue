@@ -44,11 +44,11 @@ const downloadTable = () => {
 
 <template>
   <div>
-    <div class="flex justify-between mb-2">
+    <div class="flex justify-between mb-2 gap-2 flex-wrap">
       <div class="">
         <FormInput v-model="searchFilter" placeholder="Filtrar por contenido" />
       </div>
-      <div class="flex gap-2">
+      <div class="flex gap-2 ">
         <popover>
           <div class="border border-gray_dark flex items-center rounded-lg px-2 gap-2 cursor-pointer h-full">
             Columnas
