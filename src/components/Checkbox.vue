@@ -11,7 +11,7 @@ const input = () => {
 <template>
   <div @click="input" 
   :class="{'border-green-500 bg-green-200 text-green-800': modelValue }"
-  class="w-6 h-6 border border-gray_dark flex justify-center items-center rounded-md cursor-pointer duration-300">
+  class="w-6 h-6 border border-color_border flex justify-center items-center rounded-md cursor-pointer duration-300">
     <span v-show="modelValue">✔</span>
   </div>
 </template>

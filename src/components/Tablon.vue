@@ -141,7 +141,7 @@ const sortByContent = (columnName) => {
 
 <template>
   <table
-    class="text-text_main w-full border border-gray_dark [&_*>tr>*]:border-y [&_*>tr>*]:border-y-gray_dark [&_*>tr>*]:py-1 [&_*>tr>*]:px-2">
+    class="text-text_main w-full border border-color_border [&_*>tr>*]:border-y [&_*>tr>*]:border-y-color_border [&_*>tr>*]:py-1 [&_*>tr>*]:px-2 ">
     <thead class="">
       <tr class="">
         <th v-if="modelValue" class="max-w-5">

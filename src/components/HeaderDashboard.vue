@@ -12,7 +12,7 @@
       <BreadCrumb />
     </div> -->
     <div
-      class="border-b border-gray dark:border-gray_dark transition-all duration-300 min-h-12 flex items-center justify-between px-4">
+      class="bg-color_bg_overflow border-b border-color_border transition-all duration-300 min-h-12 flex items-center justify-between px-4">
       <h2 class="text-2xl">
         <slot>Title</slot>
       </h2>

@@ -69,6 +69,6 @@ const handleInputCurrency = (ev) => {
       :value="option[setElementOptionValue]">{{ option[setElementOptionLabel] }}</option>
   </select>
   <input v-else-if="type == 'checkbox'" :type="type" />
-  <input v-else-if="type == 'currency'" inputmode="numeric" type="currency" :value="modelValue" @input="handleInputCurrency" class="border border-gray_dark outline-none text-darkoutline-none bg-transparent rounded-md  px-2 py-1 w-full"/>
-  <input v-else :type="type" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" class="border border-gray_dark outline-none text-darkoutline-none bg-transparent rounded-md  px-2 py-1 w-full" />
+  <input v-else-if="type == 'currency'" inputmode="numeric" type="currency" :value="modelValue" @input="handleInputCurrency" class="border border-color_border outline-none text-darkoutline-none bg-transparent rounded-md  px-2 py-1 w-full"/>
+  <input v-else :type="type" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" class="border border-color_border outline-none text-darkoutline-none bg-transparent rounded-md  px-2 py-1 w-full" />
 </template>

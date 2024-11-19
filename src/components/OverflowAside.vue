@@ -16,18 +16,21 @@ const closeAside = () => {
 </script>
 
 <template>
-  <div v-if="props.modelValue" @mousedown="closeAside" class="bg-dark_opacity z-50 fixed bg-alternative h-full w-full left-0 top-0">
-    <div @mousedown.stop class="move bg-vainilla dark:bg-dark z-50 bg-overlay flex flex-col fixed inset-y-0 h-full lg:h-screen border-l dark:border-gray_dark border-overlay shadow-xl  w-screen max-w-2xl  right-0 ">
-      <div class="px-4 flex items-center h-14 border-b dark:border-gray_dark">
+  <div v-if="props.modelValue" @mousedown="closeAside" class="bg-black/20 backdrop-blur-md z-50 fixed  h-full w-full left-0 top-0">
+    <div @mousedown.stop class="move bg-color_bg_overflow z-50 flex flex-col fixed inset-y-0 h-full lg:h-screen border-l border-color_border shadow-xl  w-screen max-w-2xl  right-0 ">
+      <div class="px-4 flex items-center h-14 border-b border-color_border">
         <slot name="header"></slot>
       </div>
-      <div class="p-4 flex-1 h-14 border-b dark:border-gray_dark overflow-auto">
+      <div class="p-4 flex-1 h-14 border-b border-color_border overflow-auto">
         <slot></slot>
       </div>
       <div class="flex items-center flex-row-reverse h-14 px-4">
         <slot name="footer">
-          <slot name="otherButtons"></slot>
-          <ButtonCancel @click="updateData"/>
+          <ButtonTablon>
+            <slot name="button_content">
+              Demo
+            </slot>
+          </ButtonTablon>
         </slot>
       </div>
     </div>

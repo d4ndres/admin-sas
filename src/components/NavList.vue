@@ -6,7 +6,6 @@ const {toggleAside} = store
 
 
 const navList = [
-  { path: '/home', text: 'Home', icon: 'home-outline' },
   { path: '/home/empleados', text: 'Empleados', icon: 'address-card' },
   { path: '/home/actividades', text: 'Actividades', icon: 'clippy' },
   { path: '/home/horas_extra', text: 'Horas extra', icon: 'clock' },
@@ -71,3 +70,10 @@ onMounted(() => {
     </div>
   </aside>
 </template>
+
+<style scoped>
+.router-link-active {
+  background-color: rgb(var(--color-bg-active));
+  color: rgb(var(--color-text-active));
+}
+</style>

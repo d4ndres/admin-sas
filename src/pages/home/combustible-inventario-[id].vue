@@ -40,7 +40,7 @@ const columns = [
       <template #default="{ searchFilter, data, columns }">
         <Tablon :data="data" :columns="columns" :searchFilter="searchFilter" >
           <template #default="{ bindKey, value }">
-            <div v-if="bindKey === 'cantidad'" class="flex justify-center">
+            <div v-if="bindKey === 'cantidad'" class="flex">
               <StateIndicator :state=" value > 0 ? 'success' : 'danger'" class="flex gap-2 min-w-20 items-center">
                 <Icon :name="value > 0 ? 'up' : 'down'"/>
                 {{ value }}

@@ -18,10 +18,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="flex md:flex-row flex-col-reverse h-[100vh] bg-vainilla dark:bg-dark dark:text-gray_dark_font transition-[background] duration-300">
+  <div class="bg-color_bg text-color_text_main flex md:flex-row flex-col-reverse h-[100vh] transition-[background] duration-300">
     <NavList 
     
-    class="border-r border-gray dark:border-gray_dark flex md:flex-col transition-all duration-300"
+    class="bg-color_bg_overflow border-r border-color_border flex md:flex-col transition-all duration-300"
     :class="{ 
       'min-w-[250px] ': isAsideOpen, 
       'min-w-[50px]': !isAsideOpen 
