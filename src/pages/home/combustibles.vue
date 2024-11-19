@@ -23,25 +23,50 @@ let showModalIngresosCombustible = ref(false);
 let showModalGastoCombustible = ref(false);
 
 
-
+const columns = [
+  { autoValue: () => null, text: 'Historial' },
+  { bindKey: 'id', text: 'Id' },
+  { bindKey: 'nombre', text: 'Nombre' },
+  { bindKey: 'cantidadActual', text: 'Cantidad actual' },
+]
 
 </script>
 
 <template>
   <HeaderDashboard>
     Combustibles
-    <template #buttons>
-      <ButtonAction type="down" @click="showModalGastoCombustible = !showModalGastoCombustible">
-        Gastos
-      </ButtonAction>
-      <ButtonAction type="up" @click="showModalIngresosCombustible = !showModalIngresosCombustible">
-        Ingresos
-      </ButtonAction>
-    </template>
   </HeaderDashboard>
 
   <NuxtLayout  name="content">
-    <DataTable :data="showCombustiblesToTable" :callbacksRow="callbacksRow" />
+
+
+
+    <WrapperTablon :data="showCombustiblesToTable" :columns="columns">
+      <template #customControllers>
+        <ButtonTablon @click="showModalGastoCombustible = true">
+          Eliminar
+          <Icon name="down" />
+        </ButtonTablon>
+        <ButtonTablon @click="showModalIngresosCombustible = true">
+          Crear
+          <Icon name="up" />
+        </ButtonTablon>
+      </template>
+      <template #default="{ searchFilter, data, columns }">
+        <Tablon :data="data" :columns="columns" :searchFilter="searchFilter" v-model="rowsSelected">
+          <template #default="{ bindKey, row }">
+            <router-link v-if="bindKey === 'Historial'"
+            :to="{ path: `/home/combustible-inventario-${row.id}` }"
+            class="block bg-gray-200/50 min-h-6 rounded-r-full border border-gray-500 relative overflow-hidden [&_*]:hover:translate-x-0 cursor-pointer"
+            >
+              <div class="w-full h-full bg-blue-300 absolute -translate-x-[calc(100%_-_30px)] duration-300 flex items-center justify-end rounded-r-full pr-2">
+                <Icon name="arrowLink"/>
+              </div>
+            </router-link>
+          </template>
+        </Tablon>
+      </template>
+    </WrapperTablon>
   </NuxtLayout>
 
   <OverflowAside v-model="showModalIngresosCombustible">

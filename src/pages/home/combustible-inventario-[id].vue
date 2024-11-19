@@ -14,7 +14,18 @@ onMounted(() => {
 })
 
 
-console.log(combustible_id)
+const columns = [
+  { bindKey: 'id', text: 'Id'},
+  { bindKey: 'nombre', text: 'Combustible'},
+  { bindKey: 'fecha', text: 'Fecha'},
+  { bindKey: 'cantidad', text: 'Cantidad'},
+  { bindKey: 'valorTotal', text: 'Valor total'},
+  { bindKey: 'lote', text: 'Lote'},
+  { bindKey: 'empleado', text: 'Empleado'},
+  { bindKey: 'vehiculo', text: 'Vehiculo'},
+  { bindKey: 'actividad', text: 'Actividad'},
+  
+]
 
 </script>
 
@@ -25,6 +36,19 @@ console.log(combustible_id)
   </HeaderDashboard>
 
   <NuxtLayout  name="content">
-    <DataTable :data="showCombustiblesHistorialToTable(combustible_id)" />
+    <WrapperTablon :data="showCombustiblesHistorialToTable(combustible_id)"  :columns="columns">
+      <template #default="{ searchFilter, data, columns }">
+        <Tablon :data="data" :columns="columns" :searchFilter="searchFilter" >
+          <template #default="{ bindKey, value }">
+            <div v-if="bindKey === 'cantidad'" class="flex justify-center">
+              <StateIndicator :state=" value > 0 ? 'success' : 'danger'" class="flex gap-2 min-w-20 items-center">
+                <Icon :name="value > 0 ? 'up' : 'down'"/>
+                {{ value }}
+              </StateIndicator>
+            </div>
+          </template>
+        </Tablon>
+      </template>
+    </WrapperTablon>
   </NuxtLayout>
 </template>
