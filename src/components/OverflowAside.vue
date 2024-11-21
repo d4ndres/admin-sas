@@ -24,7 +24,7 @@ const closeAside = () => {
       <div class="p-4 flex-1 h-14 border-b border-color_border overflow-auto">
         <slot></slot>
       </div>
-      <div class="flex items-center flex-row-reverse h-14 px-4">
+      <!-- <div class="flex items-center flex-row-reverse h-14 px-4">
         <slot name="footer">
           <ButtonTablon>
             <slot name="button_content">
@@ -32,7 +32,7 @@ const closeAside = () => {
             </slot>
           </ButtonTablon>
         </slot>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
