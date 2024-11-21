@@ -74,17 +74,29 @@ const computedColumns = computed(() => {
   return []
 });
 
+function getNestedValue(obj, keyPath) {
+  return keyPath.split('.').reduce((acc, key) => {
+    return acc && acc[key] !== undefined ? acc[key] : undefined;
+  }, obj);
+}
+
 const computedData = computed(() => {
   return props.data.map((row, index) => {
     return computedColumns.value.reduce((acc, { bindKey, autoValue, text }) => {
-      if (bindKey in row) {
-        acc[bindKey] = row[bindKey];
-      } else if (typeof autoValue === 'function') {
+
+      if (typeof autoValue === 'function') {
         acc[text] = autoValue({ row, index });
+        return acc
+      } 
+      
+      const value = getNestedValue(row, bindKey);
+      if (value !== undefined) {
+        acc[bindKey] = value;
       } else {
         acc[bindKey] = null;
       }
       return acc;
+
     }, {});
   });
 });

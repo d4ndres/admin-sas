@@ -1,28 +1,33 @@
 <script setup>
-import { useMainStore } from '~/Store/MainStore';
-const store = useMainStore()
-const {setHistorialDeActividades} = store
-const {showHistorialDeActividadesToTable} = storeToRefs(store)
+// import { useMainStore } from '~/Store/MainStore';
+// const store = useMainStore()
+// const {setHistorialDeActividades} = store
+// const {showHistorialDeActividadesToTable} = storeToRefs(store)
 
-onMounted(() => {
-  $fetch('/api/actividadesRealizadas')
-  .then(({data}) => {
-    setHistorialDeActividades(data)
-  })
+// onMounted(() => {
+//   $fetch('/api/actividadesRealizadas')
+//   .then(({data}) => {
+//     setHistorialDeActividades(data)
+//   })
+// });
 
-});
+import { useActividadesStore } from '~/Store/Actividades';
+const actividadesStore = useActividadesStore()
+const {actividades} = storeToRefs(actividadesStore)
+
 
 const columns = [
   { bindKey: 'id', text: 'Id' },
   { bindKey: 'fecha', text: 'Fecha' },
-  { bindKey: 'empleado', text: 'Empleado' },
-  { bindKey: 'actividad', text: 'Actividad' },
-  { bindKey: 'lote', text: 'Lote' },
-  { bindKey: 'semilla', text: 'Semilla' },
+  { bindKey: 'Empleado.nombre', text: 'Empleado' },
+  { bindKey: 'Actividad.nombre', text: 'Actividad' },
+  { bindKey: 'Lote.nombre', text: 'Lote' },
+  { bindKey: 'Semilla.nombre', text: 'Semilla' },
 ]
+const showModal = ref(false);
 
 
-let showModal = ref(false);
+
 </script>
 
 
@@ -32,7 +37,7 @@ let showModal = ref(false);
   </HeaderDashboard>
   <NuxtLayout name="content">
     
-    <WrapperTablon :data="showHistorialDeActividadesToTable" :columns="columns">
+    <WrapperTablon :data="actividades" :columns="columns">
       <template #customControllers>
         <ButtonTablon @click="showModal = true">
           Crear
@@ -50,7 +55,7 @@ let showModal = ref(false);
       <h2 class="text-2xl">Ingreso de actividades</h2>
     </template>
 
-    <LogicIngresoDeActividades />
+    <!-- <LogicIngresoDeActividades /> -->
 
     <template #otherButtons>
       <ButtonCancel type="submit" form="IngresoDeActividades">Enviar</ButtonCancel>
