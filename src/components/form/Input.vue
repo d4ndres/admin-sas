@@ -62,13 +62,13 @@ const handleInputCurrency = (ev) => {
 
 <template>
   <select v-if="type == 'select'" :value="modelValue" @input="emitInput"
-    class="outline-none dark:bg-dark bg-transparent rounded-md  px-2 py-1 w-full">
+    class="border border-color_border outline-none dark:bg-dark rounded-md  px-2 py-1 w-full bg-color_bg_overflow">
     <option  v-if="optionsIsPrimitive" v-for="(option, index) in options" :key="option + index" :value="option">
       {{ option }}</option>
     <option v-else v-for="(option, index) in options" :key="option[setElementOptionValue] + index"
       :value="option[setElementOptionValue]">{{ option[setElementOptionLabel] }}</option>
   </select>
   <input v-else-if="type == 'checkbox'" :type="type" />
-  <input v-else-if="type == 'currency'" inputmode="numeric" type="currency" :value="modelValue" @input="handleInputCurrency" class="border border-color_border outline-none text-darkoutline-none bg-transparent rounded-md  px-2 py-1 w-full"/>
-  <input v-else :type="type" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" class="border border-color_border outline-none text-darkoutline-none bg-transparent rounded-md  px-2 py-1 w-full" />
+  <input v-else-if="type == 'currency'" inputmode="numeric" type="currency" :value="modelValue" @input="handleInputCurrency" class="bg-color_bg_overflow border border-color_border outline-none text-darkoutline-none bg-transparent rounded-md  px-2 py-1 w-full"/>
+  <input v-else :type="type" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" class="bg-color_bg_overflow border border-color_border outline-none text-darkoutline-none bg-transparent rounded-md  px-2 py-1 w-full" />
 </template>

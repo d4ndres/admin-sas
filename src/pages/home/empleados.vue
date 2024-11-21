@@ -12,8 +12,6 @@ const columns = [
   { autoValue: () => null, text: 'Controller' }
 ]
 
-const showModal = ref(false)
-
 const loaderOnToggle = ref(false)
 const toggleEstado = async (row) => {
   if( loaderOnToggle.value ) return
@@ -33,15 +31,6 @@ const toDelete = async () => {
 
 
 
-const creatingEmpleado = ref(false)
-const createNewEmpleado = async (ev) => {
-  const fields = Object.fromEntries(new FormData(ev.target).entries());
-  
-  creatingEmpleado.value = true
-  await create(fields)
-  creatingEmpleado.value = false
-  ev.target.reset()
-}
 
 </script>
 
@@ -57,10 +46,12 @@ const createNewEmpleado = async (ev) => {
           <Icon :name="loaderRemove ? 'loader' : 'trash'" />
 
         </ButtonTablon>
-        <ButtonTablon @click="showModal = true">
-          Crear
-          <Icon name="add" />
-        </ButtonTablon>
+        <NuxtLink :to="{ name: 'home-empleados-crear'}" >
+          <ButtonTablon class="h-full">
+            Crear
+            <Icon name="add" />
+          </ButtonTablon>
+        </NuxtLink>
       </template>
       <template #default="{ searchFilter, data, columns }">
         <Tablon :data="data" :columns="columns" :searchFilter="searchFilter" v-model="rowsSelected">
@@ -75,29 +66,5 @@ const createNewEmpleado = async (ev) => {
     </WrapperTablon>
   </NuxtLayout>
 
-  <OverflowAside v-model="showModal">
-    <template #header>
-      <h2 class="text-2xl">Crear empleado</h2>
-    </template>
-
-    <!-- <LogicAgregarEmpleado /> -->
-
-    <form @submit.prevent="createNewEmpleado">
-      <FormInputWrapper for="nombre" label="Nombre">
-        <FormInput name="nombre" id="nombre" autocomplete="off" />
-      </FormInputWrapper>
-      <FormInputWrapper for="especialidad" label="Especialidad">
-        <FormInput name="especialidad" id="especialidad" autocomplete="off"/>
-      </FormInputWrapper>
-      <button>
-        <ButtonTablon class="flex justify-center items-center text-lg py-1 w-min min-w-28 min-h-10">
-          <span v-show="!creatingEmpleado">
-            Crear
-          </span>
-          <Icon v-show="creatingEmpleado" name="loader"/>
-        </ButtonTablon>
-      </button>
-
-    </form>
-  </OverflowAside>
+  <NuxtPage></NuxtPage>
 </template>

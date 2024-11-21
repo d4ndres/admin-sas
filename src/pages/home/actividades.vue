@@ -1,19 +1,7 @@
 <script setup>
-// import { useMainStore } from '~/Store/MainStore';
-// const store = useMainStore()
-// const {setHistorialDeActividades} = store
-// const {showHistorialDeActividadesToTable} = storeToRefs(store)
-
-// onMounted(() => {
-//   $fetch('/api/actividadesRealizadas')
-//   .then(({data}) => {
-//     setHistorialDeActividades(data)
-//   })
-// });
-
-import { useActividadesStore } from '~/Store/Actividades';
-const actividadesStore = useActividadesStore()
-const {actividades} = storeToRefs(actividadesStore)
+import { useTaskStore } from '~/Store/Task';
+const taskStore = useTaskStore()
+const { tasks } = storeToRefs(taskStore)
 
 
 const columns = [
@@ -24,9 +12,6 @@ const columns = [
   { bindKey: 'Lote.nombre', text: 'Lote' },
   { bindKey: 'Semilla.nombre', text: 'Semilla' },
 ]
-const showModal = ref(false);
-
-
 
 </script>
 
@@ -36,13 +21,15 @@ const showModal = ref(false);
     Actividades
   </HeaderDashboard>
   <NuxtLayout name="content">
-    
-    <WrapperTablon :data="actividades" :columns="columns">
+
+    <WrapperTablon :data="tasks" :columns="columns">
       <template #customControllers>
-        <ButtonTablon @click="showModal = true">
-          Crear
-          <Icon name="add" />
-        </ButtonTablon>
+        <NuxtLink :to="{ name: 'home-actividades-crear'}" >
+          <ButtonTablon class="h-full">
+            Crear
+            <Icon name="add" />
+          </ButtonTablon>
+        </NuxtLink>
       </template>
       <template #default="{ data, columns, searchFilter }">
         <Tablon :data="data" :columns="columns" :searchFilter="searchFilter"></Tablon>
@@ -50,17 +37,5 @@ const showModal = ref(false);
     </WrapperTablon>
   </NuxtLayout>
 
-  <OverflowAside v-model="showModal">
-    <template #header>
-      <h2 class="text-2xl">Ingreso de actividades</h2>
-    </template>
-
-    <!-- <LogicIngresoDeActividades /> -->
-
-    <template #otherButtons>
-      <ButtonCancel type="submit" form="IngresoDeActividades">Enviar</ButtonCancel>
-    </template>
-  </OverflowAside>
+  <NuxtPage></NuxtPage>
 </template>
-
-

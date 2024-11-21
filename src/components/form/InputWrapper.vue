@@ -12,7 +12,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="flex gap-1 flex-col mb-4">
+  <div class="flex gap-1 flex-col mb-2">
     <label :for="for" class="font-bold dark:text-gray_dark_font">{{label}}</label>
     <slot></slot>
   </div>

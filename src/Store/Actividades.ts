@@ -3,19 +3,21 @@ import { defineStore } from 'pinia'
 export const useActividadesStore = defineStore('actividadesStore', () => {
   const actividades = ref([])
   
+  const setActividades = (data : any) => {
+    actividades.value = data
+  }
+
+  
   const initActividades = ( mayTo = false ) => {
     if( mayTo || !actividades.value.length ) {
-      $fetch(`/api/actividadesRealizadas`)
+      $fetch(`/api/actividades`)
       .then((response) => {
         setActividades(response.data as never)
       })
     }
   }
-
-  const setActividades = (data : any) => {
-    actividades.value = data
-  }
-
+  
+  
   initActividades()
   return {
     actividades
