@@ -1,33 +1,13 @@
 <script setup>
-import { useMainStore } from '~/Store/MainStore';
-const store = useMainStore()
-const {setCombustibles} = store
-const {showCombustiblesToTable} = storeToRefs(store)
-
-const router = useRouter()
-const callbacksRow = ref([])
-
-onMounted(() => {
-  $fetch('/api/combustiblesInventario')
-  .then(({data}) => {
-    setCombustibles(data)
-    callbacksRow.value = data.map((item) => {
-      return () => {
-        router.push(`/home/combustible-inventario-${item.id}`)
-      }
-    })
-  })
-})
-
-let showModalIngresosCombustible = ref(false);
-let showModalGastoCombustible = ref(false);
-
+import {useCombustiblesStore} from '~/Store/Combustibles'
+const combustibleStore = useCombustiblesStore()
+const {combustibles} = storeToRefs(combustibleStore)
 
 const columns = [
-  { autoValue: () => null, text: 'Historial' },
   { bindKey: 'id', text: 'Id' },
   { bindKey: 'nombre', text: 'Nombre' },
   { bindKey: 'cantidadActual', text: 'Cantidad actual' },
+  { autoValue: () => null, text: 'Registro' },
 ]
 
 </script>
@@ -41,21 +21,25 @@ const columns = [
 
 
 
-    <WrapperTablon :data="showCombustiblesToTable" :columns="columns">
+    <WrapperTablon :data="combustibles" :columns="columns">
       <template #customControllers>
-        <ButtonTablon @click="showModalGastoCombustible = true">
-          Eliminar
-          <Icon name="down" />
-        </ButtonTablon>
-        <ButtonTablon @click="showModalIngresosCombustible = true">
-          Crear
-          <Icon name="up" />
-        </ButtonTablon>
+        <NuxtLink :to="{ name: 'home-combustibles-gasto'}" >
+          <ButtonTablon class="h-full">
+            Gasto
+            <Icon name="down" />
+          </ButtonTablon>
+        </NuxtLink>
+        <NuxtLink :to="{ name: 'home-combustibles-ingreso'}" >
+          <ButtonTablon class="h-full">
+            Ingreso
+            <Icon name="up" />
+          </ButtonTablon>
+        </NuxtLink>
       </template>
       <template #default="{ searchFilter, data, columns }">
-        <Tablon :data="data" :columns="columns" :searchFilter="searchFilter" v-model="rowsSelected">
+        <Tablon :data="data" :columns="columns" :searchFilter="searchFilter" >
           <template #default="{ bindKey, row }">
-            <router-link v-if="bindKey === 'Historial'"
+            <router-link v-if="bindKey === 'Registro'"
             :to="{ path: `/home/combustible-inventario-${row.id}` }"
             class="block bg-gray-200/50 min-h-6 rounded-r-full border border-gray-500 relative overflow-hidden [&_*]:hover:translate-x-0 cursor-pointer"
             >
@@ -69,7 +53,9 @@ const columns = [
     </WrapperTablon>
   </NuxtLayout>
 
-  <OverflowAside v-model="showModalIngresosCombustible">
+  <NuxtPage></NuxtPage>
+
+  <!-- <OverflowAside v-model="showModalIngresosCombustible">
     <template #header>
       <h2 class="text-2xl">Ingreso de combustible</h2>
     </template>
@@ -92,6 +78,6 @@ const columns = [
     <template #otherButtons>
       <ButtonCancel type="submit" form="GastosDeCombustible">Enviar</ButtonCancel>
     </template>
-  </OverflowAside>
+  </OverflowAside> -->
 
 </template>

@@ -52,11 +52,15 @@ const emitInput = (ev) => {
   })
 }
 
+const formattedValueToCurrency = (value) => value.replace(/[^0-9]/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, '.')
 const handleInputCurrency = (ev) => {
-  const currency = ev.target.value.replace(/[^0-9]/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, '.')  
-  ev.target.value = currency
-  emit('update:modelValue', currency)
+  const currency = ev.target.value.replace(/\./g, ''); 
+  ev.target.value = formattedValueToCurrency(currency)
+  emit('update:modelValue', Number(currency))
 }
+const formattedValueToCurrencyModel = computed(() => {
+  return formattedValueToCurrency(String(props.modelValue))
+}) 
 
 </script>
 
@@ -69,6 +73,6 @@ const handleInputCurrency = (ev) => {
       :value="option[setElementOptionValue]">{{ option[setElementOptionLabel] }}</option>
   </select>
   <input v-else-if="type == 'checkbox'" :type="type" />
-  <input v-else-if="type == 'currency'" inputmode="numeric" type="currency" :value="modelValue" @input="handleInputCurrency" class="bg-color_bg_overflow border border-color_border outline-none text-darkoutline-none bg-transparent rounded-md  px-2 py-1 w-full"/>
+  <input v-else-if="type == 'currency'" inputmode="numeric" type="currency" :value="formattedValueToCurrencyModel" @input="handleInputCurrency" class="bg-color_bg_overflow border border-color_border outline-none text-darkoutline-none bg-transparent rounded-md  px-2 py-1 w-full"/>
   <input v-else :type="type" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" class="bg-color_bg_overflow border border-color_border outline-none text-darkoutline-none bg-transparent rounded-md  px-2 py-1 w-full" />
 </template>
