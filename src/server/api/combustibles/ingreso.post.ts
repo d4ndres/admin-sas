@@ -14,7 +14,7 @@ export default defineEventHandler(async (event) => {
   } 
 
   const responseLog = await client
-    .from('CombustibleHistorial').insert( body ).select()
+    .from('CombustibleHistorial').insert( body ).select('*, CombustibleInventario( nombre )')
 
   const responseInv = await client
     .from('CombustibleInventario')

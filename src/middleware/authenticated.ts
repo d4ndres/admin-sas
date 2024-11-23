@@ -7,7 +7,4 @@ export default defineNuxtRouteMiddleware((to) => {
   if( to.name === 'home' ) {
     return navigateTo({ name: 'home-actividades'})
   }
-
-
-
 })

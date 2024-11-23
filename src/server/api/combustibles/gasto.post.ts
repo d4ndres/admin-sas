@@ -35,9 +35,12 @@ export default defineEventHandler(async (event) => {
   const responseLog = await client
     .from('CombustibleHistorial')
     .insert( bodyHistorico as never )
-    .select()
-    
-  
+    .select(`
+      *,
+      CombustibleInventario( nombre ), 
+      CombustibleGasto( Actividad( nombre), Empleado( nombre ), Lote( nombre ), Vehiculo( nombre ) )
+      
+      `)
   
   // Actualización del inventario
   const responseInv = await client
