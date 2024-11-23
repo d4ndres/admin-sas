@@ -15,10 +15,15 @@ export const useTaskStore = defineStore('taskStore', () => {
       })
     }
   }
+
+  const registrarTask = ( data : any) => {
+    console.log(data)
+  }
   
   
   initTask()
   return {
-    tasks
+    tasks,
+    registrarTask
   }
 })

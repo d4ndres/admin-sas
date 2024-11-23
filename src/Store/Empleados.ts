@@ -1,20 +1,9 @@
+import type { Empleado, NewEmpleado } from '~/types/main'
 import { defineStore } from 'pinia'
-
-type NewEmpleado = {
-  nombre: string,
-  especialidad: string
-}
-type Empleado = {
-  created_at: string,
-  especialidad: string,
-  id: Number,
-  isActive: Boolean,
-  nombre: string
-}
-
 
 export const useEmpleadosStore = defineStore('empleadosStore', () => {
   
+  // Empleados
   const empleados = ref<Empleado[]>([])
   
   const initEmpleados = ( mayTo = false ) => {
@@ -26,11 +15,9 @@ export const useEmpleadosStore = defineStore('empleadosStore', () => {
     }
   }
   
-
   const setEmpleados = (data : Empleado[]) => {
     empleados.value = data
   }
-
 
   const create = async (fieldToNewEmpleado : NewEmpleado) => {
     const response = await $fetch('/api/empleados/', {
@@ -78,6 +65,26 @@ export const useEmpleadosStore = defineStore('empleadosStore', () => {
   } 
 
 
+  //Horas extra
+  const horasExtra = ref<any>([])
+
+  const setHorasExtra = (data: any) => {
+    horasExtra.value = data
+  }
+
+  const initHorasExtra = async (mayTo = false) => {
+    if (mayTo || !horasExtra.value.length) {
+      const response = await $fetch('/api/empleados/horasExtra/')
+      setHorasExtra(response.data as never)
+    }
+  }
+
+
+
+
+
+
+
   initEmpleados()
   return {
     empleados,
@@ -85,6 +92,8 @@ export const useEmpleadosStore = defineStore('empleadosStore', () => {
     setEmpleados,
     create,
     remove,
-    toggleOnActive
+    toggleOnActive,
+    horasExtra,
+    initHorasExtra
   }
 })

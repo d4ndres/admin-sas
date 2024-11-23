@@ -10,7 +10,7 @@ defineProps({
 
 <template>
   <div 
-  class="border border-color_border flex items-center rounded-lg px-2 gap-2"
+  class="border border-color_border flex items-center rounded-md px-2 gap-2"
   :class="{
     'text-gray-500 cursor-default': state === 'disabled',
     'cursor-pointer': state !== 'disabled'
