@@ -1,10 +1,5 @@
+import {type Combustible} from '~/types/main'
 import { serverSupabaseClient } from '#supabase/server'
-
-type Combustible = {
-  id: number,
-  nombre: string,
-  cantidadActual: number
-}
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)

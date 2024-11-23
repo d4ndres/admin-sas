@@ -1,11 +1,5 @@
 import { defineStore } from 'pinia'
-import combustiblesInventario from '~/server/api/combustiblesInventario'
-
-type Combustible = {
-  id: number,
-  nombre: string,
-  cantidadActual: number
-}
+import {type Combustible} from '~/types/main'
 
 
 export const useCombustiblesStore = defineStore('combustiblesStore', () => {
@@ -25,24 +19,35 @@ export const useCombustiblesStore = defineStore('combustiblesStore', () => {
     }
   }
 
+
+  const actualizarFrontendInventario = ( combustible : Combustible ) => {
+    const index = combustibles.value.findIndex( (item : Combustible) => item.id === combustible.id )
+    combustibles.value.splice(index, 1, combustible)
+  } 
+
   const ingresoCombustible = async ( bodyIngresoCombustible :  any ) => {
-    const response  = await $fetch('/api/combustibles/ingreso', {
+    const response : any = await $fetch('/api/combustibles/ingreso', {
       method: 'POST',
       body: JSON.stringify(bodyIngresoCombustible)
     })
     
-    if( response.data.inventario ) {
-      const [data] : Combustible[] = response.data.inventario 
-      const index = combustibles.value.findIndex( (item : Combustible) => item.id === data.id )
-      combustibles.value.splice(index, 1, data)
-
-    }
-  } 
+    if( response.data.inventario ) actualizarFrontendInventario(response.data.inventario[0])
+  }
+  
+  const gastoCombustible = async ( bodyGastoCombustible : any) => {
+    const response : any  = await $fetch('/api/combustibles/gasto', {
+      method: 'POST',
+      body: JSON.stringify(bodyGastoCombustible)
+    })
+    
+    if( response.data.inventario ) actualizarFrontendInventario(response.data.inventario[0])
+  }
   
   
   initCombustibles()
   return {
     combustibles,
-    ingresoCombustible
+    ingresoCombustible,
+    gastoCombustible
   }
 })
