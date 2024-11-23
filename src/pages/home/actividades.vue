@@ -1,4 +1,5 @@
 <script setup>
+import {formatter} from '~/hooks/useTime'
 import { useTaskStore } from '~/Store/Task';
 const taskStore = useTaskStore()
 const { tasks } = storeToRefs(taskStore)
@@ -6,7 +7,7 @@ const { tasks } = storeToRefs(taskStore)
 
 const columns = [
   { bindKey: 'id', text: 'Id' },
-  { bindKey: 'fecha', text: 'Fecha' },
+  { bindKey: 'fecha', text: 'Fecha', autoValue: ({row}) => formatter(row.fecha)},
   { bindKey: 'Empleado.nombre', text: 'Empleado' },
   { bindKey: 'Actividad.nombre', text: 'Actividad' },
   { bindKey: 'Lote.nombre', text: 'Lote' },

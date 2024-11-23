@@ -1,4 +1,5 @@
 <script setup>
+import {formatter} from '~/hooks/useTime'
 import { useMainStore } from '~/Store/MainStore';
 const store = useMainStore()
 const {setHorasExtra} = store
@@ -13,7 +14,7 @@ onMounted(() => {
 
 const columns = [
   { bindKey: 'id', text: 'Id' },
-  { bindKey: 'fecha', text: 'Fecha' },
+  { bindKey: 'fecha', text: 'Fecha', autoValue: ({row}) => formatter(row.fecha)},
   { bindKey: 'empleado', text: 'Empleado' },
   { bindKey: 'actividad', text: 'Actividad' },
   { bindKey: 'horaInicio', text: 'Hora inicio' },
