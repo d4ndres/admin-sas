@@ -9,7 +9,8 @@ const navList = [
   { path: '/home/empleados', text: 'Empleados', icon: 'address-card' },
   { path: '/home/actividades', text: 'Actividades', icon: 'clippy' },
   { path: '/home/horas_extra', text: 'Horas extra', icon: 'clock' },
-  { path: '/home/combustibles', text: 'Combustibles', icon: 'oil' }
+  { path: '/home/combustibles', text: 'Combustibles', icon: 'oil' },
+  { path: '/home/cosecha', text: 'Cosecha', icon: 'truck' },
 ]
 
 const username = computed(() => 'admin');
@@ -47,7 +48,7 @@ onMounted(() => {
 
     <div class="flex-1 overflow-y-auto overflow-x-hidden flex flex-row md:flex-col">
       <RouterLink v-for="item in navList" :key="item.path" :to="item.path">
-        <NavItem :isExpanded="isAsideOpen" :dataItem="item" />
+        <NavItem :isExpanded="isAsideOpen" :dataItem="item" class="dark:fill-white" />
       </RouterLink>
     </div>
     <div class="flex flex-row md:flex-col">

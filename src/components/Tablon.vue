@@ -162,7 +162,7 @@ const sortByContent = (columnName) => {
         <th v-for="({ bindKey, text }) in computedColumns" :key="`h_${bindKey}`" @click="sortByContent(bindKey ?? text)"
           class="relative text-left [&_.absolute]:hover:opacity-50"
           :class="{ 'border-b-4 border-focus': (bindKey === sortByColumn?.column || text === sortByColumn?.column) && sortByColumn }">
-          <span>
+          <span class="text-nowrap">
             {{ text }}
           </span>
           <Icon class="absolute top-[50%] -translate-y-1/2 right-1 opacity-0 duration-300" :class="{
