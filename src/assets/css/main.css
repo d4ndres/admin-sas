@@ -8,7 +8,7 @@
   --color-text-main: 0 0 0;
   --color-text-active: 0 0 0;
   --color-border: 217 218 221;
-  --color-bg-active: 147 197 253;
+  --color-bg-active: 144 192 244;
 }
 
 :root.dark {
@@ -17,7 +17,7 @@
   --color-text-main: 219 219 219;
   --color-text-active: 255 255 255;
   --color-border: 142 142 142;
-  --color-bg-active: 147 197 253;
+  --color-bg-active: 144 192 244;
 }
 
 
