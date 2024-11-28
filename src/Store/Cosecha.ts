@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 
 export const useCosechaStore = defineStore('cosechaStore', () => {
-  const registros = ref([])
+  const registros = ref<any[]>([])
   
   const setCosecha = (data : any) => {
     registros.value = data
@@ -17,9 +17,30 @@ export const useCosechaStore = defineStore('cosechaStore', () => {
     }
   }
   
+  const nuevoRegistro = async (bodyNuevoRegistro: any) => {
+    const response: any = await $fetch('/api/cosecha', {
+      method: 'POST',
+      body: JSON.stringify(bodyNuevoRegistro)
+    })
+
+    if(response.error === null ) {
+      registros.value = [...registros.value, ...response.data]
+    }
+  }
+
+  const registrarLlegada = async ( id: number, bodyRegistro: any) => {
+    const response = await $fetch( `/api/cosecha/${id}`,{
+      method: 'PUT',
+      body: JSON.stringify(bodyRegistro)
+    })
+
+    console.log(response)
+  }
   
   initCosecha()
   return {
-    registros
+    registros,
+    nuevoRegistro,
+    registrarLlegada
   }
 })

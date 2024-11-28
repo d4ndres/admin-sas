@@ -17,6 +17,10 @@ const props = defineProps({
   modelValue: {
     type: Array,
     default: null
+  },
+  onlySelectedOne: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -55,6 +59,7 @@ const isSelected = (row) => {
 
 const onChangeCheckBox = (checked, row) => {
   if (checked) {
+    if(props.onlySelectedOne && selected.value.length ) return
     selected.value = [...selected.value, row]
   } else {
     const index = selected.value.findIndex(item => compare(toRaw(item), toRaw(row)))
@@ -156,8 +161,10 @@ const sortByContent = (columnName) => {
     class="text-text_main w-full border border-color_border [&_*>tr>*]:border-y [&_*>tr>*]:border-y-color_border [&_*>tr>*]:py-1 [&_*>tr>*]:px-2 ">
     <thead class="">
       <tr class="">
-        <th v-if="modelValue" class="max-w-5">
-          <Checkbox :modelValue="isSelectedAll" @change="(value) => toggleSelectedAll(value)"></Checkbox>
+        <th v-if="modelValue" >
+          <div class="h-6 w-6">
+            <Checkbox v-if="!onlySelectedOne" :modelValue="isSelectedAll" @change="(value) => toggleSelectedAll(value)"></Checkbox>
+          </div>
         </th>
         <th v-for="({ bindKey, text }) in computedColumns" :key="`h_${bindKey}`" @click="sortByContent(bindKey ?? text)"
           class="relative text-left [&_.absolute]:hover:opacity-50"

@@ -43,7 +43,7 @@ const downloadTable = () => {
 
 
 <template>
-  <div class="min-w-max">
+  <div class="">
     <div class="flex justify-between mb-2 gap-2 flex-wrap">
       <div class="">
         <FormInput v-model="searchFilter" placeholder="Filtrar por contenido" />
