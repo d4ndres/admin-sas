@@ -47,8 +47,6 @@ onMounted(() => {
 const submitSalidaCombustible = (ev) => {
   const fields = Object.fromEntries(new FormData(ev.target).entries())
   fields.user_id = getUserId()
-  console.log(fields)
-
   sending.value = true
   $fetch('/api/gastoDeCombustible', {
     method: 'post',

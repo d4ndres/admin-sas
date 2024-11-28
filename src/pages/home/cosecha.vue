@@ -54,7 +54,7 @@ const toUpdate = ref([])
         </NuxtLink>
 
         <NuxtLink v-if="toUpdate.length" :to="{ name: 'home-cosecha-llegadas-registroId', params: { registroId: 2 } }">
-          <ButtonTablon class="h-full">
+          <ButtonTablon class="h-full"  :class="{ 'animation-blink': toUpdate.length}">
             Registrar llegada
             <Icon name="add" />
           </ButtonTablon>
@@ -79,3 +79,17 @@ const toUpdate = ref([])
 
   <NuxtPage></NuxtPage>
 </template>
+
+<style scoped>
+
+.animation-blink {
+  animation: blinker 2s linear infinite;
+}
+
+/* El borde se ilumina */
+@keyframes blinker {
+  50% {
+    border-color: #f7f7f7;
+  }
+}
+</style>

@@ -7,6 +7,6 @@ export default defineEventHandler(async (event) => {
   const responeSupabase = await client
     .from('Cosecha')
     .insert( body )
-    .select('*')
+    .select('*, Semilla( nombre ), Lote( nombre )')
   return responeSupabase
 })

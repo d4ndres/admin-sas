@@ -79,11 +79,9 @@ export const useEmpleadosStore = defineStore('empleadosStore', () => {
     }
   }
 
-
-
-
-
-
+  const pushHorasExtra = (data: any) => {
+    horasExtra.value = [...horasExtra.value, data]
+  }
 
   initEmpleados()
   return {
@@ -94,6 +92,7 @@ export const useEmpleadosStore = defineStore('empleadosStore', () => {
     remove,
     toggleOnActive,
     horasExtra,
-    initHorasExtra
+    initHorasExtra,
+    pushHorasExtra
   }
 })
